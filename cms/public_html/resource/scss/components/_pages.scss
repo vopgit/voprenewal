@@ -1,0 +1,240 @@
+$page-style : (
+    border     : 1px solid,
+    width      : rem(34),
+    height     : rem(34),
+    line-height: rem(34),
+    round      : 0,
+    font-size  : rem(14),
+);
+
+$page-style-color  : (
+    bg                : #ffffff,
+    text              : $color-text-b,
+    focus-bg          : 0,
+    border            : #ffffff,
+    arrow-color       : '%23' + str-replace( quote(#696969), "#", "") ,
+    arrow-color-hover : '%23' + str-replace( quote(map-get($colors, 1 )), "#", ""),
+);
+
+
+
+.page_wrap {
+    text-align: center;
+    padding-top: rem(50);
+    padding-bottom: rem(50);
+    .page_p.pc{
+      display: inline-block !important;
+    }
+    .page_p.mo{
+      display: none !important;
+    }
+}
+
+.page {
+  font-size:  map-get($page-style, "font-size");
+
+  .current_m{
+    display: none;
+    vertical-align: middle;
+    .total{
+      margin-left: 0.25em;
+    }
+  }
+
+  a {
+    z-index: 0;
+    position: relative;
+    display: inline-block;
+    width: map-get($page-style, "width");
+    height: map-get($page-style, "height");
+    line-height: map-get($page-style, "line-height");
+    color: map-get($page-style-color, "text");
+    border: map-get($page-style, "border") map-get($page-style-color, "border");
+    border-radius: map-get($page-style, "round");
+    vertical-align: middle;
+
+    border-radius: 50%;
+    &.prev {
+      margin-right: rem(5);
+      color: $color-text-b;
+    }
+
+    &.arrow{
+      border:0;
+    }
+
+    &.next {
+      margin-left: rem(5);
+    }
+    i[class*=icon_], i[class^=icon_]{
+      display: block;
+      background-size: rem(30);
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      @include vendor(transition, ' background 0.3s ease-out');
+      &.icon_prev2{
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{map-get($page-style-color , arrow-color)}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='22.5 8.4 19.9 8.4 13.5 15.4 19.9 22.4 22.5 22.4 16.2 15.4 '/%3E%3Cpolygon points='16.6 8.4 13.9 8.4 7.6 15.4 13.9 22.4 16.6 22.4 10.2 15.4 '/%3E%3C/svg%3E");
+      }
+      &.icon_prev{
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{map-get($page-style-color , arrow-color)}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='19.5 8.4 16.9 8.4 10.5 15.4 16.9 22.4 19.5 22.4 13.2 15.4 '/%3E%3C/svg%3E");
+      }
+      &.icon_next{
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{map-get($page-style-color , arrow-color)}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='10.5 8.4 13.2 8.4 19.5 15.4 13.2 22.4 10.5 22.4 16.9 15.4 '/%3E%3C/svg%3E");
+      }
+      &.icon_next2{
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{map-get($page-style-color , arrow-color)}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='7.6 8.4 10.2 8.4 16.6 15.4 10.2 22.4 7.6 22.4 13.9 15.4 '/%3E%3Cpolygon points='13.5 8.4 16.2 8.4 22.5 15.4 16.2 22.4 13.5 22.4 19.9 15.4 '/%3E%3C/svg%3E");
+      }
+    }
+    &:hover{
+      i[class*=icon_], i[class^=icon_]{
+        &.icon_prev2{
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{map-get($page-style-color , arrow-color-hover)}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='22.5 8.4 19.9 8.4 13.5 15.4 19.9 22.4 22.5 22.4 16.2 15.4 '/%3E%3Cpolygon points='16.6 8.4 13.9 8.4 7.6 15.4 13.9 22.4 16.6 22.4 10.2 15.4 '/%3E%3C/svg%3E");
+        }
+        &.icon_prev{
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{map-get($page-style-color , arrow-color-hover)}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='19.5 8.4 16.9 8.4 10.5 15.4 16.9 22.4 19.5 22.4 13.2 15.4 '/%3E%3C/svg%3E");
+        }
+        &.icon_next{
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{map-get($page-style-color , arrow-color-hover)}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='10.5 8.4 13.2 8.4 19.5 15.4 13.2 22.4 10.5 22.4 16.9 15.4 '/%3E%3C/svg%3E");
+        }
+        &.icon_next2{
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{map-get($page-style-color , arrow-color-hover)}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='7.6 8.4 10.2 8.4 16.6 15.4 10.2 22.4 7.6 22.4 13.9 15.4 '/%3E%3Cpolygon points='13.5 8.4 16.2 8.4 22.5 15.4 16.2 22.4 13.5 22.4 19.9 15.4 '/%3E%3C/svg%3E");
+        }
+      }
+    }
+  }
+  .page_p {
+    display: inline-block;
+    vertical-align:middle;
+    @include clearfix;
+    a {
+      float: left;
+      text-indent: 0;
+      display: block;
+      position: relative;
+      background: none;
+      color: map-get($page-style-color, "text");
+      font-weight: 400;
+      margin: 0;
+      text-decoration: none;
+      z-index: 0;
+      background-color: #fff;
+      //border-left: 0;
+      margin: 0 rem(5);
+      @include vendor(transition, ' color 0.3s ease-out');
+      &:hover{
+        z-index: 1;
+        color: map-get($colors, 1);
+        font-weight: 500;
+      }
+      &.act {
+        position: relative;
+        background-color: map-get($colors, 1);
+        border: 0;
+        color: #ffffff;
+        border-radius: 100%;
+        font-weight: 500;
+        &:before{
+          // content:'';
+          // display: block;
+          position: absolute;
+          left:50%;
+          bottom:0.25em;
+          width:40%;
+          margin-left:-20%;
+          height:1px;
+          background: map-get($colors, 1);
+        }
+      }
+      .nav3_color &:hover {
+          color: map-get($gnbColors, 3);
+      }
+      .nav3_color &.act{
+          background-color: map-get($gnbColors, 3);
+      }
+    }
+  }
+}
+
+@include tab {
+  $page-style : (
+    font-size  : rem(32)
+  );
+  .page_wrap {
+    padding-top: rem(80);
+    .page_p{
+      display: none;
+    }
+    .current_m{
+      display: inline-block;
+      vertical-align: middle;
+      font-size: rem(28);
+    }
+  }
+  .page{
+    a{
+      width: rem(60);
+      height: rem(60);
+      line-height: rem(60);
+      i[class*=icon_], i[class^=icon_]{
+        background-size:  rem(45);
+      }
+    }
+  }
+}
+
+
+
+
+@mixin pageColor($c){
+    $page-style-color  : (
+      bg                : #ffffff,
+      border            : #ffffff,
+      arrow-color-hover : '%23' + str-replace( quote($c), "#", ""),
+    );
+    .page {
+      a {
+        border-color:map-get($page-style-color, "border");
+        &:hover{
+          i[class*=icon_], i[class^=icon_]{
+            &.icon_prev2{
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{map-get($page-style-color , arrow-color-hover)}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='22.5 8.4 19.9 8.4 13.5 15.4 19.9 22.4 22.5 22.4 16.2 15.4 '/%3E%3Cpolygon points='16.6 8.4 13.9 8.4 7.6 15.4 13.9 22.4 16.6 22.4 10.2 15.4 '/%3E%3C/svg%3E");
+            }
+            &.icon_prev{
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{map-get($page-style-color , arrow-color-hover)}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='19.5 8.4 16.9 8.4 10.5 15.4 16.9 22.4 19.5 22.4 13.2 15.4 '/%3E%3C/svg%3E");
+            }
+            &.icon_next{
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{map-get($page-style-color , arrow-color-hover)}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='10.5 8.4 13.2 8.4 19.5 15.4 13.2 22.4 10.5 22.4 16.9 15.4 '/%3E%3C/svg%3E");
+            }
+            &.icon_next2{
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{map-get($page-style-color , arrow-color-hover)}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='7.6 8.4 10.2 8.4 16.6 15.4 10.2 22.4 7.6 22.4 13.9 15.4 '/%3E%3Cpolygon points='13.5 8.4 16.2 8.4 22.5 15.4 16.2 22.4 13.5 22.4 19.9 15.4 '/%3E%3C/svg%3E");
+            }
+          }
+        }
+      }
+      .page_p {
+        a {
+          background-color: #fff;
+          &:hover{
+            color: $c;
+          }
+          &.act {
+            background-color: $c;
+            color: #ffffff;
+            &:before{
+              background: $c;
+            }
+          }
+        }
+      }
+    }
+}
+
+
+@each $name, $color in $gnbColors {
+  .page_wrap.color_#{$name - 1}{
+    @include pageColor($color)
+  }
+}
+
+

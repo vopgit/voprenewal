@@ -1,0 +1,97 @@
+/*
+*****************************************
+*          typography  : start
+*****************************************
+*/
+
+//
+// font-face  : font mixin (폰트)
+// date       : 2020.07.27
+// 
+@mixin font-face(
+  $font-family,
+  $font-path,
+  $font-weight: null, 
+  $uni : null,
+  $font-style: null, 
+  $exts: woff2 woff eot otf
+) {
+
+  $src: null;
+
+  $extmods: (
+    eot: "?",
+    svg: "#" + str-replace($font-family, " ", "_")
+  );
+
+  $formats: (
+    otf: "opentype",
+    ttf: "truetype",
+    eot: "embedded-opentype"
+  );
+
+  @each $ext in $exts {
+    $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+    $src: append($src, url(quote($font-path + "." + $extmod)) format(quote($format)), comma);
+  }
+
+  @font-face {
+    font-family: quote($font-family);
+    src: local(quote($font-family)), $src;
+    font-style: $font-style;
+    font-weight: $font-weight;
+    @if $uni{
+      unicode-range: unquote($uni);
+    }
+  }
+}
+
+/*
+영문 (대문자) : U+0041-005A
+영문 (소문자) : U+0061-007A
+숫자 : U+0030-0039
+한글 : U+AC00-U+D7A3
+전체 : U+0020-007E
+*/
+
+
+//폰트관련
+//
+//font : Noto Sans Korean
+//$font-path: "//cdn.jsdelivr.net/npm/@fontsource/noto-sans@4.5.0/files/";
+//$font-name: "noto-sans-all"; 
+//@include font-face("Noto Sans Korean", $font-path + $font-name + "-100-normal",     100, U+AC00-U+D7A3, woff woff2);
+//@include font-face("Noto Sans Korean", $font-path + $font-name + "-300-normal",     300, U+AC00-U+D7A3, woff woff2);
+//@include font-face("Noto Sans Korean", $font-path + $font-name + "-400-normal",     400, U+AC00-U+D7A3, woff woff2);
+//@include font-face("Noto Sans Korean", $font-path + $font-name + "-500-normal",     500, U+AC00-U+D7A3, woff woff2);
+//@include font-face("Noto Sans Korean", $font-path + $font-name + "-700-normal",     700, U+AC00-U+D7A3, woff woff2);
+//@include font-face("Noto Sans Korean", $font-path + $font-name + "-900-normal",     900, U+AC00-U+D7A3, woff woff2);
+
+
+
+@font-face {
+  font-family: 'GongGothicMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'GongGothicLight';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicLight.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*영문폰트 Roboto, 한글 폰트 Noto Sans KR */
+$font-family : 'MalgunGothic', '맑은고딕',  'Noto Sans KR', 'Apple Gothic', 'HY Gulim','MalgunGothic','HY Dotum', 'Helvetica Neue','Helvetica','Arial','apple color emoji', 'segoe ui emoji', 'noto color emoji', 'android emoji', 'emojisymbols', 'emojione mozilla', 'twemoji mozilla', 'segoe ui symbol', sans-serif;
+
+body, html{font-family: $font-family;}
+
+.font_nsk  { font-family: 'Noto Sans KR', sans-serif;}
+.font_robo { font-family: 'Roboto', sans-serif;}
+.font_mts{font-family: 'Montserrat','Noto Sans KR', serif;}
+.font_esm{font-family: 'GongGothicMedium', serif;}
+
+
+

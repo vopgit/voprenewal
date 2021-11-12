@@ -1,0 +1,133 @@
+@use "sass:math";
+@use '../../common/variables' as var;
+@use '../../common/' as *;
+@use '../../common/color' as color;
+@use '../flex/mixin' as flex;
+
+
+$_border : 1px solid #dddddd;
+$_page_fs           : 14;
+$_width             : em(24, $_page_fs);
+$_height            : em(24, $_page_fs);
+$_line-height       : em(25, $_page_fs);
+$_round             :  em(5, $_page_fs);
+$_arrow-color       : '%23' + str-replace( '#999999', "#", "");
+$_arrow-color-hover : '%23' + str-replace( #{map-get(color.$colors, 1 )}, "#", "");
+$_point-color       : color.$color-text-b;
+$_text-color        : color.$color-text-b4;
+
+.popup_pageing{
+  .page {
+    a {
+      font-size: rem(14);
+    }
+  }
+}
+
+.page {
+  &_wrap {
+    font-size: rem(14);
+  }
+  &{
+    
+    @include flex.flex-box();
+    @include flex.flex-wrap(nowrap);
+    @include flex.flex-direction(row);
+    @include flex.align-items(center);
+    @include flex.justify-content(center);
+  }
+  .current_m{
+    display: none;
+    vertical-align: middle;
+  }
+  
+  a {
+    font-size: rem($_page_fs);
+    z-index: 0;
+    position: relative;
+    display: block;
+    width: $_width; 
+    height: $_height;
+    line-height: $_line-height;
+    color: $_text-color;
+    // border: $_border;
+    border-radius: $_round;
+    font-weight: 400;
+    text-align: center;
+    &.prev, &.next {
+      margin-left: em(5, $_page_fs);
+      margin-right: em(5, $_page_fs);
+      color: color.$color-text-b;
+    }
+    i[class*=icon_], i[class^=icon_]{
+      display: block;
+      text-align: center;
+      text-indent: -9999px;
+      font-size: 1px;
+      overflow: hidden;
+      background: no-repeat center center;
+      background-size: rem(24);
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      @include vendor(transition, ' background 0.3s ease-out');
+      &.icon_prev2{
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$_arrow-color }' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='22.5 8.4 19.9 8.4 13.5 15.4 19.9 22.4 22.5 22.4 16.2 15.4 '/%3E%3Cpolygon points='16.6 8.4 13.9 8.4 7.6 15.4 13.9 22.4 16.6 22.4 10.2 15.4 '/%3E%3C/svg%3E");
+      }
+      &.icon_prev{
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$_arrow-color }' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='19.5 8.4 16.9 8.4 10.5 15.4 16.9 22.4 19.5 22.4 13.2 15.4 '/%3E%3C/svg%3E");
+      }
+      &.icon_next{
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$_arrow-color }' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='10.5 8.4 13.2 8.4 19.5 15.4 13.2 22.4 10.5 22.4 16.9 15.4 '/%3E%3C/svg%3E");
+      }
+      &.icon_next2{
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$_arrow-color }' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='7.6 8.4 10.2 8.4 16.6 15.4 10.2 22.4 7.6 22.4 13.9 15.4 '/%3E%3Cpolygon points='13.5 8.4 16.2 8.4 22.5 15.4 16.2 22.4 13.5 22.4 19.9 15.4 '/%3E%3C/svg%3E");
+      }
+    }
+    &:hover{
+      i[class*=icon_], i[class^=icon_]{
+        &.icon_prev2{
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$_arrow-color-hover}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='22.5 8.4 19.9 8.4 13.5 15.4 19.9 22.4 22.5 22.4 16.2 15.4 '/%3E%3Cpolygon points='16.6 8.4 13.9 8.4 7.6 15.4 13.9 22.4 16.6 22.4 10.2 15.4 '/%3E%3C/svg%3E");
+        }
+        &.icon_prev{
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$_arrow-color-hover}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='19.5 8.4 16.9 8.4 10.5 15.4 16.9 22.4 19.5 22.4 13.2 15.4 '/%3E%3C/svg%3E");
+        }
+        &.icon_next{
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$_arrow-color-hover}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='10.5 8.4 13.2 8.4 19.5 15.4 13.2 22.4 10.5 22.4 16.9 15.4 '/%3E%3C/svg%3E");
+        }
+        &.icon_next2{
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$_arrow-color-hover}' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpolygon points='7.6 8.4 10.2 8.4 16.6 15.4 10.2 22.4 7.6 22.4 13.9 15.4 '/%3E%3Cpolygon points='13.5 8.4 16.2 8.4 22.5 15.4 16.2 22.4 13.5 22.4 19.9 15.4 '/%3E%3C/svg%3E");
+        }
+      }
+    }
+  }
+  .page_p {
+    display: block;
+    @include flex.flex-box();
+    @include flex.flex-wrap(nowrap);
+    @include flex.flex-direction(row);
+    @include flex.align-items(center);
+    a {
+      text-indent: 0;
+      background: none;
+      color: $_text-color;
+      margin: 0;
+      @at-root *:not(.popup_pageing) &{
+        &{
+          margin-left: rem(9);
+        }
+      }
+      text-decoration: none;
+      border: 0;
+      &:hover{
+        z-index: 1;
+        color: $_point-color;
+      }
+      &.act {
+        background-color: map-get(color.$colors,2);;
+        color: #ffffff;
+        border-radius: em(5, $_page_fs);
+      }
+    }
+  }
+}

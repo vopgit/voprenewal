@@ -1,0 +1,19 @@
+@use '../../common/' as *;
+
+.dp{
+    &_inb{display: inline-block !important;}
+    &_hide{display: none !important;}
+    &_show{display: block !important;}
+    
+}
+
+
+
+br{
+    &.lg,&.md,&.sm,&.xs,&.xxs{
+        display: none;
+    }
+    &.none{
+        display: none;
+    }
+}

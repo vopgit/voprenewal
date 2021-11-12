@@ -1,0 +1,168 @@
+/*
+*****************************************
+*          board  : start
+*
+*          type   : A
+*****************************************
+*/
+
+@use "sass:math";
+@use '../../common/variables' as var;
+@use '../../common/' as *;
+@use '../../common/color' as color;
+@use '../flex/mixin' as flex;
+@use '../icon/mixin' as icon;
+
+
+
+$_fs    : 16;
+$_fs-mo : 13;
+$_boards : (
+	borderT : 2px solid #222,
+	border : 1px solid #ddd,
+
+	trH : #fafafa,
+
+
+	thC : color.$color-text-b,
+	thFw : 400,
+
+
+	tdC : color.$color-text-b5,
+	tdFw : 400,
+
+);
+
+
+
+
+.board_view {
+    &.type_a{
+        &{
+            font-size: rem($_fs);
+            border-top: map-get($_boards, borderT);
+            border-bottom: map-get($_boards, border);
+        }
+        .bv_{
+            &top {
+                padding: em(28, $_fs) em(40, $_fs);
+                border-bottom: 1px solid #dddddd;
+                background-color: #f7f8f9;
+            }
+            &bottom {
+                background: #fff;
+                padding: em(28, $_fs) em(40, $_fs);
+                border-bottom: 1px solid #dddddd;
+            }
+            &tit {
+                font-size: em(24,  $_fs);
+                line-height: em(34, 24);
+                word-break: break-all;
+            }
+            &info{
+                &_box{
+                    margin-top: em(12, $_fs);
+                }
+                &{
+                    overflow: hidden;
+                    @include flex.flex-box();
+                    @include flex.flex-direction(row);
+                    li{
+                        @include flex.flex-box();
+                        @include flex.flex-wrap(nowrap);
+                        @include flex.flex-direction(row);
+                        @include flex.align-items(center);
+                        margin-left: em(40, $_fs);
+                        transform: translateX(em(-40, $_fs));
+                        position: relative;
+                        color: #999999;
+                        &[data-tit]{
+                            &:before {
+                                flex: 0 1 auto;
+                                display: block;
+                                content: attr(data-tit) '\00a0:\00a0';
+                                display: block;
+                                font-weight: 400;
+                            }
+                        }
+                        &:after{
+                            content: 'I';
+                            font-weight: 100;
+                            transform: translateX(em(-20, $_fs));
+                            position: absolute;
+                            left:0;
+                        }
+                    }
+                }
+            }
+            &con {
+                padding: em(40, $_fs);
+                line-height: 1.8;
+                font-size: rem(18);
+                color: #555555;
+                font-weight: 300;
+                min-height: em(400, $_fs);
+                img {
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    margin-top: rem(40);
+                    margin-bottom: rem(40);
+                    width: 100%;
+                    max-width:  rem(800);;
+                    height: auto;
+                }
+            }
+            &file {
+                display: block;
+                position: relative;
+                min-width: em(30, $_fs);
+                width: em(30, $_fs);
+                min-width: em(30, $_fs);
+                height: em(30, $_fs);
+                border-radius: 100%;
+                background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M29.5 17.4L14 1.9c-0.7-0.7-1.5-1-2.4-1 -0.9 0-1.8 0.3-2.4 1L2.4 8.8h0c-0.7 0.7-1 1.5-1 2.4 0 0.9 0.3 1.8 1 2.4h0l17.5 17.5 1.4-1.4L3.8 12.2h0c-0.3-0.3-0.4-0.6-0.4-1 0-0.4 0.1-0.7 0.4-1l6.9-6.9c0.3-0.3 0.6-0.4 1-0.4 0.4 0 0.7 0.1 1 0.4l15.4 15.4c0.3 0.3 0.4 0.6 0.4 1 0 0.4-0.1 0.7-0.4 1l-3.4 3.4c-0.3 0.3-0.6 0.4-1 0.4 -0.4 0-0.7-0.1-1-0.4L10.7 12.3c-0.3-0.3-0.4-0.6-0.4-1 0-0.4 0.1-0.7 0.4-1 0.3-0.3 0.6-0.4 1-0.4 0.4 0 0.7 0.1 1 0.4L23.4 21l1.4-1.4L14.1 8.8c-0.7-0.7-1.5-1-2.4-1 -0.9 0-1.8 0.3-2.4 1 -0.7 0.7-1 1.5-1 2.4 0 0.9 0.3 1.8 1 2.4l11.9 11.9c0.7 0.7 1.5 1 2.4 1 0.9 0 1.8-0.3 2.4-1l3.4-3.4c0.7-0.7 1-1.5 1-2.4C30.5 18.9 30.1 18 29.5 17.4z' fill='%23222'/%3E%3C/svg%3E") center center;
+                background-repeat: no-repeat;
+                background-size: 50% auto;
+                background-color: #f7f8f9;
+                border: 1px solid #eee;
+                &_wrap{
+                    @include flex.flex-box();
+                    @include flex.flex-wrap(nowrap);
+                    @include flex.flex-direction(row);
+                    >* {
+                        flex: 0 1 auto;
+                    }
+                }
+                &_box{
+                    width: 100%;
+                    margin-left: em(20, $_fs);
+                    overflow: hidden;
+                    & .file {
+                        display: inline-block;
+                        margin-left: em(20, $_fs);
+                        word-break: break-all;
+                        font-weight: 500;
+                        color: #333;
+                        position: relative;
+                        transform: translateX(em(-20, $_fs));
+                        line-height: em(20, $_fs);
+                        padding: em(5, $_fs) 0;
+                        &:before{
+                            content: 'I';
+                            font-weight: 100;
+                            opacity: 0.3;
+                            transform: translateX(-0.75em);
+                            position: absolute;
+                        }
+                        &:hover,
+                        &:focus {
+                            color: map-get(color.$colors, 1);
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

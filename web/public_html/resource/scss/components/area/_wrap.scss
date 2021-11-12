@@ -1,0 +1,33 @@
+@use '../../common/variables' as var;
+@use '../../common/' as *;
+
+$_padding : 30;
+
+.wrap, [class*=wrap_]{
+    width : 100%;
+    margin : {
+        left: auto;
+        right: auto;
+    }
+    padding: {
+        left: rem($_padding) ;
+        right: rem($_padding) ;
+    };
+}
+.wrap{
+    max-width: rem(var.$wrap + ($_padding * 2));
+}
+
+[class*=wrap_]{
+    @each $wrap in  var.$wraps {
+        &.wrap_#{$wrap} {
+            max-width : rem($wrap + ($_padding * 2));
+            @media screen and (max-width: #{rem($wrap + ($_padding * 2)) }) {
+                padding: {
+                    left: rem(20) ;
+                    right: rem(20) ;
+                };
+            }
+        }
+    }
+}

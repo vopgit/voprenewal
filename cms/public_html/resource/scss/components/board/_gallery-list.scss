@@ -1,0 +1,106 @@
+
+@use "sass:math";
+@use '../../common/variables' as var;
+@use '../../common/' as *;
+@use '../../common/color' as color;
+@use '../flex/mixin' as flex;
+@use '../icon/mixin' as icon;
+
+
+$_fs  : 16;
+
+.eadit_photo{
+
+    .ph{
+        &_wrap{
+            border: solid 1px #dcdee2;
+            padding: em(30,$_fs);
+            background-color: #fff;
+        }
+        &_thumbnail{
+            @include flex.flex-box();
+            margin-bottom: em(30,$_fs);
+            flex-wrap: wrap;
+            .thum{
+                &_img{
+                    display: flex;
+                    align-items: center;
+                    align-content: center;
+                    width: em(110, $_fs);
+                    height: em(110, $_fs);
+                    background: #e7e9ec;
+                    overflow: hidden;
+                    cursor: pointer;
+                    &:hover{
+                        box-shadow: 5px 2px 5px -1px rgb(0 0 0 / 10%);
+                    }
+                    img{
+                        display: block;
+                        max-width: 100%;
+                    }
+                    margin-right: em(20,$_fs);
+                }
+                &_txt{
+                   position: relative;
+
+
+                    .btn {
+                        position: absolute;
+                        bottom:0;
+                        left: 0;;
+
+                    }
+                    .num_code{
+                        margin-bottom: em(10,14);
+                    }
+                }
+            }
+        }
+    }
+    .table_box{
+        &{
+            border : {
+                left: 0;
+                right: 0;
+            }
+        }
+    }
+
+   &.simple{
+    .table_box{
+        td{
+            padding: em(14,$_fs) 0;
+        }
+    }
+   }
+
+   &.detail{
+    .table_box{
+        th,td{
+            padding: em(14,$_fs)  em(14,$_fs);
+        }
+    }
+   }
+    
+}
+
+.simple.eadit_photo_box{
+    .eadit_photo_{
+        &col{
+            flex: 0 1 auto !important;
+            width: 25% !important;
+        }
+    }
+    .table_box{border-bottom: 0; border-color: #ebeef2}
+    .table_box.vertical tr > *{
+        border-color: #ebeef2;
+    }
+    [data-simple=none]{
+        display: none !important;
+    }
+    .table_box{
+        td{
+            padding: em(14,$_fs) 0;
+        }
+    }
+}

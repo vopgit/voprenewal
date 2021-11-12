@@ -1,0 +1,232 @@
+@use "sass:math";
+@use 'common/' as *;
+@use 'common/variables' as var;
+@use 'common/color' as color;
+@use 'components/flex/mixin' as flex;
+@use 'components/icon/mixin' as icon;
+@use 'components/form/mixin' as form;
+
+
+$_fs: 16;
+.vcr{
+    &_box{
+        //{view 첨부파일 
+        &.bg_wh{
+            .vcr_list{
+                &{
+                    padding: 0;
+                    background-color: #fff;
+                    border: 1px solid color.$color-border;
+                }
+                li{
+                    padding: em(20, 16) ;
+                }
+            }
+        }
+        //}view 첨부파일 
+        
+    }
+    &_tit{
+        &.bor_bt_111{
+            border-bottom: em(4,$_fs) solid #111;
+            padding-bottom: em(10,$_fs);
+        }
+    }
+
+    &_list{
+        &.dst_1{
+            border: {
+                left:0  !important;
+                right:0 !important;
+                top:0 !important;;
+            }
+            margin-top: 0;
+
+
+            a{
+                &{
+                    @include flex.align-items(flex-start);
+                }
+                > [class^=iconFt]{
+                    border: 0;
+                    line-height: 1;
+                    background: #fff !important;
+                    color: inherit !important;
+                    &.iconFt_review{
+                        min-width: auto !important;
+                        padding-right: 1em;
+                    }
+                }
+                > [class^=iconFt] + span{
+                    padding-left: 0;
+                }
+            }
+        }
+
+        &.list_dot{
+                > li{
+                    &:before{
+                        content:'';
+                        font-size: rem($_fs);
+                        border-radius: 50%;
+                        background-color: color.$color-text-b4;
+                        width: em(5,$_fs);
+                        min-width: em(5,$_fs);
+                        height: em(5,$_fs);
+                        margin:  {
+                            top: em(9,$_fs);
+                            right: em(9,$_fs);
+                        };
+                    }
+                }
+        }
+    }
+    
+    
+}
+
+$_arrow_box : em(60,$_fs);
+$_arrow_mr: em(20,$_fs);
+.view_bottom{
+    &{
+        border-top: 1px solid color.$color-border;
+    }
+    
+    .arrow{
+        a{
+            &{
+                overflow: hidden;
+                display: block;
+            }
+            .txt_box{
+                display: block;
+                width: 50%;
+                padding-top: em(10,$_fs);
+
+                .ellip_1{
+                    line-height: 1.7;
+                    color: color.$color-text-b5;
+                }
+            }
+             > [class^=iconFt]{
+                width: $_arrow_box;
+                height: $_arrow_box;
+                border: 1px solid color.$color-border;
+                display: block;
+                text-align: center;
+                line-height: $_arrow_box;
+            }
+
+            &:hover{
+                > [class^=iconFt]{
+                    border-color: #222 ;
+                    color: #222 ;
+                }
+
+                .txt_box{
+                   .ellip_1{ color: color.$color-text-b;}
+                }
+            }
+           
+
+        }
+    }
+
+    .ar_next{
+        a{
+            > *{
+                float: right;
+            }
+
+            .txt_box{
+                margin-right: $_arrow_mr;
+            }
+            
+        }
+    }
+
+    .ar_prev{
+        a{
+            > *{
+                float: left;
+            }
+
+            .txt_box{
+                margin-left: $_arrow_mr;
+            }
+            
+        }
+    }
+    @include mob{
+        
+        $_arrow_box : em(45,$_fs);
+        .arrow{
+            a{
+                .txt_box{
+                    margin: 0;
+                    width: 100%;
+                    padding-top: em(10,$_fs);
+                    font-size: em(13, 16);
+                }
+                 > [class^=iconFt]{
+                    width: $_arrow_box;
+                    height: $_arrow_box;
+                    line-height: $_arrow_box;
+                }
+                .ellip_1{
+                    display: none;
+                }
+            }
+        }
+    }
+}
+$_visymbol:26;
+.vi_bner{
+    &{
+        background-color: #282828;
+        padding: em(60,$_fs);
+        margin-top: em(60,$_fs);
+        box-shadow: 0px rem(12) rem(29) 0 rgba(0, 0, 0, 0.2);
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    &_txt{
+        .iconFt_symbol{
+            width :em(35,$_visymbol);
+            height:em(35,$_visymbol);
+            font-size: rem($_visymbol);
+            color: #fff;
+            background-color: color.$compay-color;
+            @include flex.flex-box();
+            @include flex.align-items(center);
+            @include flex.justify-content(center);
+            
+        }
+        span{
+            font-size: rem(40);
+            line-height: 1;
+        }
+    }
+    @include mob {
+        $_visymbol : 10;
+        &{
+            padding: em(20,$_fs);
+            margin-top: em(40,$_fs);
+        }
+        &_txt{
+            .iconFt_symbol{
+                width :em(24,$_visymbol);
+                height:em(24,$_visymbol);
+                font-size: rem($_visymbol);
+            }
+            span{
+                font-size: rem(24);
+                line-height: 1;
+            }
+        }
+        .fs_18{
+            font-size: rem(13);
+        }
+    }
+}

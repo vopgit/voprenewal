@@ -1,0 +1,27 @@
+@use 'typography';
+@use 'size' as size;
+@use 'align';
+@use 'color';
+@use 'ellip';
+@use '../../common/' as *;
+$_fs :16;
+
+h3,
+.tit{
+    font-size: em(18,$_fs);
+    letter-spacing: rem(-1.35);
+}
+
+.sq_tit {
+    font-size: rem(16);
+    padding-left: em(11, $_fs);
+    position: relative;
+    &::before {
+        content:''; display: block;
+        width: em(6, $_fs);
+        height: em(6, $_fs);
+        position: absolute; top: 50%; left: 0;
+        @include vendor(transform, 'translateY(-50%)');
+        background-color: #3d3d3d;
+    }
+}

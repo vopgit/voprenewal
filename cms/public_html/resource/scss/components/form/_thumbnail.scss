@@ -1,0 +1,57 @@
+@use '../../common/variables' as var;
+@use '../../common/color' as color;
+@use '../../common/' as *;
+@use '../flex/mixin' as flex;
+
+
+
+$_fs13 : 13;
+.photo_thumb_box {
+    font-size: rem($_fs13);
+    width: em(120, $_fs13);
+    margin: {
+        left: auto;
+        right: auto;
+    }
+    .thumb {
+        width: em(120, $_fs13);
+        height: em(120, $_fs13);
+        border: 1px solid #dcdee2;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+            vertical-align: top;
+            width: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+    .subs {
+        margin-top: em(8, $_fs13);
+        color: #666666;
+    }
+    &.ty_ract {
+        width: em(200, $_fs13);
+        .thumb {
+            width: em(200, $_fs13);
+            height: em(116, $_fs13);
+        }
+    }
+    &.ty_circle {
+        width: em(116, $_fs13);
+        .thumb {
+            width: em(116, $_fs13);
+            height: em(116, $_fs13);
+            border-radius: 50%;
+        }
+    }
+    &.ty_vertical {
+        width: em(116, $_fs13);
+        .thumb {
+            width: em(116, $_fs13);
+            height: em(132, $_fs13);
+        }
+    }
+}

@@ -1,0 +1,160 @@
+@use 'common/' as *;
+@use 'common/color' as color;
+@use 'components/flex/mixin' as flex;
+@use 'components/icon/mixin' as icon;
+@use 'components/button/mixin' as btn;
+
+
+$_fs14 : 14;
+.exp_box {
+    font-size: rem($_fs14);
+    background-color: color.$color2-bg;
+    padding: em(40, $_fs14) em(30, $_fs14);
+    border: 1px solid color.$color-border2;
+    border-radius: 3px;
+    position: relative;
+    &::before {
+        content: ''; display: block;
+        position: absolute; top: 50%; left: 50%;
+        @include vendor(transform, 'translateY(-50%)');
+        border-left: 1px solid color.$color-border2;
+        width: 1px; height: em(90, $_fs14);
+    }
+}
+
+.writer_info {
+    .lb {
+        display: inline-block;
+        margin-right: em(5, $_fs14);
+    }
+    .col_ + .col_ {
+        padding-left: em(14, $_fs14);
+        margin-left: em(14, $_fs14);
+        position: relative;
+        &::before {
+            content:''; display: block;
+            height: em(11, $_fs14);
+            border-left: 1px solid #cccccc;
+            position: absolute; top: 50%; left: 0;
+            @include vendor(transform, 'translateY(-50%)');
+        }
+    }
+}
+
+.area_con_box.in_inq {
+    .is_inq { display: none; }
+    .table_box:first-of-type .is_inq,
+    .table_box:last-of-type .is_inq { display: inline; }
+}
+.move_inp_box {
+    .row {
+        flex: auto;
+    }
+    .inp_box {
+        flex: 1 0;
+        min-width: auto;
+        width: 100%;
+        [class*=col_] {
+            &:first-child {
+                .inp {
+                    border-radius: 3px 0 0 3px;
+                }
+            }
+            & + [class*=col_] {
+                .inp{
+                    border-radius: 0 3px 3px 0;
+                    border-left: 0;
+                }
+            }
+        }
+    }
+    .cnt_box {
+        flex: 0 1 auto;
+    }
+    .move_floor {
+        padding-right: rem(10);
+        margin-right: rem(10);
+        position: relative;
+        &::after {
+            content: ''; display: block; position: absolute; top: 50%; right: 0;
+            height: rem(24);
+            border-right: 1px solid #dcdee2;
+            @include vendor(transform, 'translateY(-50%)');
+        }
+    }
+    [class*=_item] {
+        & + [class*=_item] {
+            margin-top: rem(5);
+        }
+        &:first-child {
+            .btn.remove{ display: none;}
+        }
+        .btn.create { margin-left: 0;}
+        .btn.remove { margin-right: rem(5);}
+    }
+}
+.rd_color_box {
+    display: inline-block;
+    border-width: 1px; border-style: solid;
+    width: rem(55); height: rem(14); max-width: 100%;
+    &.bc_1 {
+        border-color: map-get(color.$front-colors, 1);
+    }
+    &.bc_2 {
+        border-color: map-get(color.$colors, 3);
+    }
+    &.bc_3 {
+        border-color: map-get(color.$front-colors, 3);
+    }
+    &.bc_4 {
+        border-color: color.$color-text-b4;
+    }
+}
+
+$_btn-colors  : (
+  "c1"  true map-get(color.$colors, 1 )  #fff map-get(color.$colors, 1 ),
+  "c2"  true map-get(color.$colors, 2 )  #fff map-get(color.$colors, 2 ),
+  "c3"  true map-get(color.$colors, 3 )  #fff map-get(color.$colors, 3 ),
+  "c4"  true map-get(color.$colors, 4 )  #fff map-get(color.$colors, 4 ),
+  "c5"  true map-get(color.$colors, 5 )  #fff map-get(color.$colors, 5 ),
+  "c6"  true map-get(color.$colors, 6 )  #fff map-get(color.$colors, 6 ),
+  "c7"  true map-get(color.$colors, 7 )  #fff map-get(color.$colors, 7 ),
+  "c8"  true map-get(color.$colors, 8 )  #fff map-get(color.$colors, 8 ),
+  "c9"  true map-get(color.$colors, 9 )  #fff map-get(color.$colors, 9 ),
+  "c10" true map-get(color.$colors, 10)  #fff map-get(color.$colors, 10 ),
+  "c11" true map-get(color.$colors, 11)  #fff map-get(color.$colors, 11,),
+  "c12" true map-get(color.$colors, 12 ) #fff map-get(color.$colors, 12 ),
+  "c13" true map-get(color.$colors, 13 ) #fff map-get(color.$colors, 13 ),
+  "c14" true map-get(color.$colors, 14 ) #fff map-get(color.$colors, 14 ),
+
+);
+em[class*=bg_c],
+em[class*=line_c] {
+    display: inline-block;
+    font-style: normal;
+    line-height: 1.8333333333em;
+    border-radius: 0.25em;
+    padding-left: 0.8333333333em;
+    padding-right: 0.8333333333em;
+    font-size: 0.75em;    
+}
+em[class*=line_c] {
+    border-width: 1px;
+    border-style: solid;
+}
+@each $name, $line-is, $bg, $text, $border, $bg-hover, $text-hover, $border-hover in $_btn-colors {
+    em{
+        line-height: 1.8333333333em;
+        border-radius: 0.25em;
+        padding-left: 0.8333333333em;
+        padding-right: 0.8333333333em;
+        &.bg_#{$name}{
+            @include btn.color($bg, $text, $border);
+        }
+        @if $line-is {
+            &.line_#{$name}{
+                @include btn.color(transparent, $bg, $bg);
+            }
+        }
+    }
+}

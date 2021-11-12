@@ -1,0 +1,14 @@
+@use '../flex/mixin' as flex;
+@use '../../common/' as *;
+@mixin size($fs : 14, $height : 50,$padding : 30){
+    font-size   : rem($fs);
+    width       : 100%;
+
+
+    padding : em(10, $fs) em($padding, $fs) 0;
+    @include flex.flex-box();
+    @include flex.flex-wrap('wrap');
+    @include flex.align-items('center');
+    @content;
+  }
+  

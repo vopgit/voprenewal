@@ -1,0 +1,217 @@
+@use '../common/variables' as var;
+@use '../common/color' as color;
+@use '../common/' as *;
+@use './flex/mixin' as flex;
+
+$_fs : 16;
+
+#popup_iframe{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: 5000;
+    display: none;
+}
+.popup{
+    &_box{
+        &{
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top:0;
+            left: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 100 !important;
+
+            @include flex.flex-box;
+            @include flex.justify-content('center');
+            @include flex.align-items('center');
+        }
+
+
+
+        .popbg{
+            position: absolute;
+            top:0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            display: block;
+        }
+
+
+    }
+    &.tit_box{
+        &{
+            background-color: #1f2532;
+            color: #fff;
+            padding-left: em(18,$_fs);
+        }
+        span {
+            font-size: em(18,$_fs);
+        }
+        .pop_close{
+            color: inherit;
+            width: em(55,$_fs);
+            height: em(55,$_fs);
+            background-color: #2f3543;
+            span{
+                font-size: em($_fs * 2,$_fs);
+            }
+        }
+    }
+    &_wrap{
+        &{
+            width: em(540,$_fs);
+            max-height: em(700,$_fs);
+            overflow-y: auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        &.wrap1300{
+            width: em(1300,$_fs);
+        }
+    }
+    &_con{
+        &{
+            background-color: #fff;
+        }
+
+
+    }
+
+    &_contents{
+        padding: em(30, $_fs);
+        &.step_2{display: none;}
+        .pop{
+            &_scroll{
+                max-height: em(350,$_fs);
+                overflow-y: auto;
+
+            }
+
+            &_pageing{
+                min-height: em(350,$_fs);
+            }
+            &_search{
+                position: relative;
+                padding-right: em(67,$_fs);
+                .btn{
+                    position: absolute;
+                    top:0;
+                    right: 0;
+                    border-radius: 0 3px 3px 0;
+
+                }
+            }
+
+
+        }
+
+        .top_tab_btn{
+            margin-left: 0;
+
+        }
+        .tab_box{
+            border: 1px solid #dcdee2;
+            border-radius: 3px;
+        }
+
+        & .table_box th,& .table_box td{
+            padding:em(14,$_fs) em(10,$_fs);
+        }
+
+        .table_box{
+            td.hover,td.on{
+                background-color: #f8f9fb;
+                color: #ed3b31;;
+            }
+
+        }
+
+    }
+
+
+}
+
+//popup Big Image
+.popBig{
+    &{
+        position: absolute;
+        top:0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        display: none;
+        cursor: pointer;
+    }
+    &_wrap{
+        width: 80%;
+        height: 80%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        overflow-y: auto;
+        img{
+            max-width: 100%;
+        }
+    }
+}
+
+.popup_box.st_preview{
+    .popup_wrap{
+        max-height:90%;
+        overflow: hidden;
+    }
+    .popup_con{
+        width: 100%;
+        max-width: 93%;
+        height: 100%;
+        padding: 0 !important;
+        position: relative;
+        overflow: visible !important;
+    }
+    .popup_contents {
+        padding:2em 0 2em;
+        overflow-x: hidden;
+        overflow-y: auto;
+        max-height: 100%;
+    }
+    .pop_close{
+        position: absolute;
+        top:-0.5em;
+        right:-2em;
+        width: 2em;
+        height: 2em;
+        font-size: 2rem;
+        text-align: center;
+        z-index: 100;
+        color: #fff;
+    }
+}
+.popup_box{
+	backgroundr:none !important;
+	}
+	.ifr_prWrap{
+		width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index:99999;
+
+	}
+  .editor_writer .popup_box{
+    background-color: rgba(0, 0, 0, 0.5) !important;
+  }

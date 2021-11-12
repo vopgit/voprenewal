@@ -1,0 +1,184 @@
+@use "sass:math";
+@use "sass:string";
+@use '../../common/variables' as var;
+@use '../../common/' as *;
+@use '../../common/color' as color;
+@use '../flex/mixin' as flex;
+
+$_sizes : (
+	'88x31',
+	'120x60',
+	'120x240',
+	'120x600',
+	'125x125',
+	'160x600',
+	'167x50',
+	'180x150',
+	
+	'200x200',
+	'234x60',
+	'250x250',
+	'250x360',
+	'240x400',
+
+	'300x250',
+	'300x50',
+	'300x100',
+	'300x600',
+	'320x50',
+	'320x100',
+	'320x480',
+	'336x280',
+
+	'406x280',
+	'468x60',
+	'480x320',
+
+	'560x60',
+	'560x90',
+	'580x400',
+
+	'600x338',
+	'630x480',
+
+	'728x90',
+	'750x100',
+	'750x200',
+	'750x300',
+	'768x1024',
+
+	'820x140',
+
+	'930x180',
+	'950x90',
+	'970x90',
+	'970x250',
+	'980x120',
+	'980x90',
+
+	'1024x768',
+	'1200x282',
+
+);
+
+.arcad{
+	height: auto;
+	position: relative;
+	background-color: transparent;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	&.bg_none{
+		background-color: transparent;
+	}
+	&_box{
+		width: 100%;
+		background-color: #f2f2f2;
+		.arcad{
+			background-color: #ddd;
+		}
+		&.bg_none{
+			background-color: transparent;
+			.arcad{
+				background-color: transparent;
+			}
+		}
+	}
+	&_area_mo{
+		display: none;
+	}
+	@include tab{
+		&_area_mo{
+			display: block;
+		}
+		&_area_pc{
+			display: none;
+		}
+		&_box.mo_over_size{
+			width: auto;
+			min-width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+	@include mob{
+		&_box.mo_over_size{
+			margin-left: rem(-20);
+			margin-right: rem(-20);
+		}
+	}
+	&_move{
+			position: fixed;
+			bottom:0;
+			right:0;
+			z-index: 100;
+	}
+	&_footer{
+			border-top: 1px solid #e5e5e5;
+			display: none;
+			position: fixed;
+			width: 100%;
+			padding: rem(10);
+			bottom:0;
+			right:0;
+			z-index: 100;
+			background-color: #f2f2f2;
+			.arcad{
+					background-color: #e5e5e5;
+			}
+	}
+	@include mob{
+			&_move{
+					bottom:rem(70);
+			}
+			&_footer{
+					display: block;
+			}
+	}
+
+
+	&.left{
+		margin-right: auto;
+		margin-left: 0;
+	}
+	&.right{
+		margin-right: 0;
+		margin-left: auto;
+	}
+		
+	&.size{
+		@each $name in $_sizes {
+			$_w : number(nth(str-split($name, "x"), 1));
+			$_h : number(nth(str-split($name, "x"), 2));
+			&_#{$name}{
+				width: rem($_w);
+				max-width: 100%;
+				//height: rem($_h);
+			}
+		}
+	}
+
+	.dfpAd{
+		position: absolute;
+		top:0px;
+		left:0px;
+		width: 100%;
+		height: 100%;
+		&:before {
+			position: absolute;
+			content: "Advertisement";
+			display: flex;
+			align-items: center;
+			width: 100%;
+			justify-content: center;
+			top: 0;
+			left: 0;
+			height:100%;
+			margin: auto;
+			font-size: 15px;
+			text-align: center;
+			color: #222;
+			z-index: 0;
+		}
+	}
+}

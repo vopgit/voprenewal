@@ -1,0 +1,58 @@
+$colors  : (
+    1 :   #1f2532, //공통
+    2 :   #4e5871, //공통 point
+    3 :   #ed3b31, //bg point
+    4 :   #f07972,  //사진보류
+    5 :   #959aa7,  //삭제,숭고하기
+    6 :   #cdd4de, //보기
+    7 :   #a6acb6,
+    8 :   #6a88d0, // 사진수정
+    9 :   #50b09d, //편집완료
+    10 :  #f88f58,  //스태틱 만들기
+    11 :  #5fb34e, //편집대기로
+    12 :  #2b91cd, //트위터 전송
+    13 :  #1255a7, //페북 노출 정보
+    14 :  #b2baca, //찾기,삭체,전송
+);
+
+$state-color : (
+    1: #44c268,//대기중
+    2: #f49a0d,//작성중
+    3: #1471d9,//발행중
+    4: #929ca7,//삭제됨
+    5: #f85c5c,//삭제됨
+);
+
+//사용자단 대표 컬러
+$front-colors  : (
+    1 :  #369ff8,
+    2 :  #f33d32,
+    3 :  #238210,
+    4 :  #222222,
+    5 :  #ffd736,
+);
+
+
+
+$color-text-b    : #222222; // font1
+$color-text-b2   : #333333; 
+$color-text-b3   : #444444; 
+$color-text-b4   : #666666; // font2
+$color-text-b5   : #999999; // font3
+$color-text-b6   : #e1e1e1;
+
+$color-text-sub  : $color-text-b4;
+$color-text-w    : #ffffff;
+$color-text-red  : #ff0000;
+
+$color-border : #dddddd;
+$color-border2 : #dcdee2;
+
+
+$compay-color  : #ed3d30;
+
+
+//공통 bg color
+$color1-bg:#f8f9fb;
+$color2-bg:#eff2f7;
+

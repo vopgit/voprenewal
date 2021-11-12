@@ -1,0 +1,11 @@
+
+node_modules/
+# .css upload x
+resource/css/
+admin/resource/css/
+# .css upload 
+!style.css
+
+*.config
+
+*.history

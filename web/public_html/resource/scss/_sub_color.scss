@@ -1,0 +1,193 @@
+
+@use 'common/color' as color;
+
+//color 컬러
+@mixin _items-colors($color) {
+    .con{
+        h2{
+        }
+        h3{
+        }
+    }
+    
+    .tab_box{
+        ul{
+            a{
+                &::before{
+                    background-color: $color;
+                }
+            }
+        }
+    }
+
+    .tit{
+        &_box{
+            border-color:$color;
+        }
+        &_tab_box{
+            a{
+                &.on,  &:hover{
+                    color:$color;
+                }
+            }
+        }
+    }
+    
+    .editorial{
+        &_area{
+            &:hover{
+                border-color:$color;
+            }
+        }
+        &_cate{
+            border-color:$color;
+            color:$color;
+        }
+        
+    }
+    
+    .rank{
+        &_item{
+            &:first-child{
+                &:before{
+                    color: $color;
+                }
+            }
+        }
+    }
+    .today{
+        &_cate{
+            color: $color;
+        }
+    }
+    
+    .ul_img2{
+        &_item:hover {
+            .ul_img2_tit{
+                &{
+                    color: $color;
+                }
+            }
+            .file_button{
+                background-color: $color;
+                border-color:$color;
+            }
+        }
+        &_info{
+            &_item{
+                &:hover{
+                    .ul_img2_info_item{
+                        &_tit{
+                            color: $color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+        
+    .search_box{
+        &_inp{
+            border-color:$color;
+        }
+        &_button{
+            color: $color;
+        }
+    }
+    .info{
+        &_box{
+            background-color: $color;
+        }
+    }
+    .view{
+        &_top{
+            background-color:  $color;
+            color: #ffffff;
+        }
+        &_top .view_top{
+            &_info, &_share button{
+                color: #ffffff;
+            }
+        }
+    }
+    .vcr{
+        &_list{
+            &.dst_1{
+                li:hover{
+                    a{
+                        > [class^=iconFt]{
+                            background: none;
+                        }
+                        &:hover{
+                            color: $color; 
+                            > [class^=iconFt]{
+                                color: $color; 
+                            }
+                        }
+                    }
+                }
+            }
+            li:hover{
+                a{
+                    &{
+                        color: $color;
+                    }
+                    > [class^=iconFt]{
+                        color:#fff;
+                        background-color:  $color;
+                        border-color:$color;
+                    }
+                }
+            }
+
+           
+
+            &.list_dot{
+                > li{
+                    &:hover{
+                        &:before{
+                            content:'';
+                            background-color:  $color;
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    .view_bottom {
+        .arrow {
+            a {
+                .txt_box {
+                    span:first-child {color: $color;}
+                }
+                &:hover{
+                    > [class^=iconFt]{
+                        border-color: $color;
+                        color: $color;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+#container{
+    &.type_pick{
+        @include _items-colors(color.$color-pick);
+    }
+    
+    &.type_opinion{
+        @include _items-colors(color.$color-opinion);
+    }
+    &.type_source{
+        @include _items-colors(color.$color-source);
+    }
+    &.type_review{
+        @include _items-colors(color.$color-review);
+    }
+}
+
+
+

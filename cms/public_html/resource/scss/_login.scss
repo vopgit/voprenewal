@@ -1,0 +1,56 @@
+@use 'common/' as *;
+@use 'common/color' as color;
+@use 'components/flex/mixin' as flex;
+@use 'components/icon/mixin' as icon;
+@use 'components/button/mixin' as btn;
+
+$_fs:16;
+$_inputHeight: 50;
+.login{
+    &_con{
+        position: fixed;
+        top:50%;
+        left: 50%;
+        transform: translate3d(-50%,-50%,0);
+        h1{
+            text-align: center;
+        }
+       .btn_box .btn{
+            height: em(60,$_fs + 2);
+            line-height: em(60 - 2,$_fs + 2);
+            font-size: rem($_fs + 2);
+            border-radius:  0 0 3px 3px;
+        }
+    }
+    &_txt{
+        text-align: center;
+        width: 100%;
+    }
+    &_inp{
+        width: 100%;
+        .inp{
+            height: em($_inputHeight,$_fs);
+            line-height: em($_inputHeight - 2,$_fs);
+            font-size: rem($_fs);
+            &:active,&:focus{
+                background-color: #f8f9fb;
+                border-color: #4e5871;
+            }
+        }
+    }
+    &_box{
+        border: 1px solid #dcdee2;
+        border-bottom: 0;;
+        background-color: #fff;
+        width: em(480,$_fs);
+        height: em(340,$_fs);
+        margin-top: em(45,$_fs);
+        padding: em(50,$_fs) em(80,$_fs);
+        @include flex.flex-box;
+        @include flex.flex-wrap('wrap');
+        @include flex.align-items('center');
+        align-content: center;
+
+
+    }
+}

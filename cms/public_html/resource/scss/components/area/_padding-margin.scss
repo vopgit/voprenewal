@@ -1,0 +1,87 @@
+
+@use '../../common/' as *;
+
+$_area-values: ("t" , "b", "l", "r", "tb", "lr");
+
+//margin auto;
+@each $var in $_area-values {
+    .m#{$var}_auto{
+        @if $var == "t" {
+            margin-top: auto;
+        }
+        @else if $var == "b"{
+            margin-bottom: auto;
+        }
+        @else if $var == "l"{
+            margin-left: auto;
+        }
+        @else if $var == "r"{
+            margin-right: auto;
+        }
+    }
+}
+@each $type in $_area-values {
+    .mr_auto{margin-right: auto;}
+    .ml_auto{margin-left: auto;}
+        @for $i from 20 to -1  {
+            $name : #{$type}_#{5 * $i * 1};
+            $num :  $i * 1;
+
+            .m#{$name}{
+
+                @if $type == "t" {
+                    margin-top: rem(5 *  $num);
+                }
+                @else if $type == "b"{
+                    margin-bottom: rem(5 *  $num);
+                }
+                @else if $type == "l"{
+                    margin-left: rem(5 *  $num);
+                }
+                @else if $type == "r"{
+                    margin-right: rem(5 *  $num);
+                }
+                @else if $type == "tb"{
+                    margin-top: rem(5 *  $num);
+                    margin-bottom: rem(5 *  $num);
+                }
+                @else if $type == "lr"{
+                    margin-left: rem(5 *  $num);
+                    margin-right: rem(5 *  $num);
+                }
+            }
+        }
+    
+}
+
+@each $type in $_area-values {
+        @for $i from 20 to -1  {
+            $name : #{$type}_#{5 * $i * 1};
+            $num :  $i * 1;
+
+            .p#{$name}{
+
+                @if $type == "t" {
+                    padding-top: rem(5 *  $num);
+                }
+                @else if $type == "b"{
+                    padding-bottom: rem(5 *  $num);
+                }
+                @else if $type == "l"{
+                    padding-left: rem(5 *  $num);
+                }
+                @else if $type == "r"{
+                    padding-right: rem(5 *  $num);
+                }
+                @else if $type == "tb"{
+                    padding-top: rem(5 *  $num);
+                    padding-bottom: rem(5 *  $num);
+                }
+                @else if $type == "lr"{
+                    padding-left: rem(5 *  $num);
+                    padding-right: rem(5 *  $num);
+                }
+            }
+        }
+
+}

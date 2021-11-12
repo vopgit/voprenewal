@@ -1,0 +1,90 @@
+@use '../../common/variables' as var;
+@use '../../common/color' as color;
+@use '../../common/' as *;
+@use '../flex/mixin' as flex;
+
+$_fs:16;
+$border : 1px solid color.$color-border2 ;
+
+.poto{
+    &_box{
+        border:1px solid color.$color-border2 ;
+        border : $border ;
+        background-color: #fff;;
+
+        .border_left{
+            border-left: $border;
+       }
+       & > .row > [class*=col_] {
+           display: -webkit-box;
+           display: -ms-flexbox;
+           display: flex;
+       }
+    }
+    &_con{
+        @include flex.flex-box;
+        @include flex.flex-wrap('wrap');
+        height: 100%;
+        padding: em(30,$_fs);
+        width: 100%;;
+
+
+        .file_box {
+            display: block;
+            position: relative;
+        }
+       .add_img{
+           width : em(198,$_fs) ;
+           height: em(116,$_fs) ;
+           border : $border ;
+           border-radius: 3px;
+           overflow: hidden;
+           text-align: center;
+
+           img{
+            width: auto;
+            max-width: 100%;
+            max-height: 100%;
+           }
+       }
+
+       & .fm_rd input[type=radio]:checked + span + span{
+           color: #222;
+       }
+       .modify_chk_box {
+           position: absolute; bottom: 0; left: 0;
+           transform: translateY(50%);
+           .fm_ch {
+               font-size: .85rem;
+           }
+       }
+    }
+}
+
+.pop_editro_photo{
+    &{
+        border : $border;
+        border-radius: 3px;;
+    }
+    & ._wrap{
+        padding:em(40,$_fs) em(40,$_fs);
+    }
+    .tab_box{
+        border: 0 !important;
+        position: relative;
+        padding-top: 0;
+        padding-bottom: 0;
+        .btn{
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-radius: 0 3px 3px  0;
+        }
+    }
+
+    .eadit_photo {
+        .ph_wrap{
+            padding: em(20,$_fs);
+        }
+    }
+}

@@ -1,0 +1,263 @@
+@use "sass:math";
+@use "sass:selector";
+@use '../../common/variables' as var;
+@use '../../common/color' as color;
+@use '../../common/' as *;
+@use 'mixin' as form;
+@use '../flex/mixin' as flex;
+@use 'poto';
+@use 'thumbnail';
+$_fs  : 16;
+$_fs-mob  : 13;
+
+.txt_inp{
+  @include form.item();
+  border-radius: 3px;;
+  &._lg{
+      @include form.size(18, 400, 60);
+  }
+  &._sm{
+    @include form.size(12, 240, 30);
+  }
+  &._rd{
+      border-radius: em(100);
+  }
+  &[class*=fm_full]{
+    width: 100%;
+    display: block;
+  }
+}
+
+
+input{
+  &.inp, &[class*=inp_]{
+      max-width: 100%;
+      @include form.item();
+      @include form.placeholder(null, #999999, null);
+
+  }
+  &.read_only{
+    background-color: #eee;
+  }
+  &.inp{
+      @include form.size(14, 240, 40);
+      border-radius: 3px;;
+    &_lg{
+        @include form.size(18, 400, 60);
+    }
+    &_sm{
+      @include form.size(12, 240, 30);
+    }
+    &_rd{
+        border-radius: em(100);
+    }
+  }
+}
+
+/* radio, checkbox */
+.fm{
+  &_rd, &_ch {
+    @include form.item-chrd();
+    & > input:disabled ~ ._icon,
+    &.disabled ._icon,
+    & > input.readonly ~ ._icon
+    {
+        &::before { background-color: #eee; }
+    }
+  }
+  &_rd{
+    @include form.size-chrd(16, 18, 100%);
+    ._icon{
+      &::after {
+        background-image: form.svgRdIcon(map-get(color.$colors, 2));
+      }
+    }
+  }
+  &_ch{
+    @include form.size-chrd(16, 16, 3);
+    ._icon{
+
+      &::after {
+        background-image: form.svgChIcon(map-get(color.$colors, 2));
+      }
+    }
+  }
+}
+
+
+
+select{
+  &.sel{
+    @include form.item();
+    @include form.size(13, 380, 30);
+      z-index: 1;
+      background-repeat: no-repeat;
+      background-image: url("data:image/svg+xml,%3Csvg version='1.1' data-png-path='../images/common/sect_arrow_down.png' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 10 10' enable-background='new 0 0 10 10' xml:space='preserve'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' fill='%23222222' d='M8.125,3.638c-0.979,1.12-1.959,2.24-3.269,3.736 C3.548,5.878,2.569,4.758,1.589,3.638C3.768,3.638,5.946,3.638,8.125,3.638z'/%3E%3C/svg%3E");
+      background-position: top 50% right em(10);
+      background-size: em(18) em(18);
+      border-radius: 3px;
+      &.st_2 {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' x='0px' y='0px' viewBox='0 0 24 24' width='24' height='24' style='enable-background:new 0 0 24 24;' xml:space='preserve'%3E%3Cpath d='M7.4,8.6l4.6,4.6l4.6-4.6L18,10l-6,6l-6-6L7.4,8.6z'/%3E%3C/svg%3E%0A");
+      }
+      &_lg{
+        @include form.size(14, 440, 60);
+      }
+      &_md{
+        @include form.size(14, 440, 40);
+      }
+
+      &_sm{
+          @include form.size(12, 120, 24);
+      }
+
+      &_rd{
+          border-radius: em(100);
+      }
+      &.border_color{
+        border-color: #222;
+      }
+  }
+  &:disabled,
+  &.disabled { background-color: #eee; }
+}
+
+
+input,
+select{
+  &[class*=fm_full]:not(.fm_full_sm):not(.fm_full_md){
+    width: 100%;
+    display: block;
+  }
+}
+
+
+
+//fm_box
+.fm_wrap{
+  font-size: 0;
+  > *{
+    vertical-align: middle;
+  }
+  @include wrap-padding( '&' , 0, '*');
+  @each $num in var.$padding-wraps {
+
+    @include wrap-padding( '&.' , $num, '*'){
+      input,
+      select{
+        &[class*=fm_full]:not(.fm_full_sm):not(.fm_full_md){
+        max-width: calc(100% - #{rem($num)});
+        }
+      }
+    }
+  }
+}
+
+.file_wrap.custom {
+    .file_con,
+    .edit .file_name { max-width: 100% !important; width: 100% !important;}
+    .create_box { flex: 1 0 auto; }
+}
+
+.file{
+  &_box{
+    @include flex.flex-box;
+    @include flex.align-items('center');
+    font-size: em(13,$_fs);
+    input[type=file]{
+      position: absolute;
+      left: -99999999999999px;
+      visibility: hidden;
+    }
+
+    &.edit {
+        .file_name {
+            position: relative;
+            border: 1px solid #dcdee2;
+            border-radius: 3px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            height: 2.3076923077em;
+            padding-left: .5em;
+            min-width: 24.230769em;
+            max-width: 24.230769em;
+        }
+    }
+
+
+
+
+    .create_box{
+      &{
+        margin-left: em(10,$_fs);
+      }
+      .btn +.btn{
+        margin-left:  em(5,$_fs);
+      }
+  }
+  &.fm_full{
+    max-width: 100%;
+    width: 100%;
+    .file_con{
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  }
+  &_con{
+    &{
+      position: relative;
+      border: 1px solid #dcdee2;
+      min-width: em(198,13);
+      max-width: em(500,13);
+      height: em(30,13);
+      border-radius: 3px;
+      overflow: hidden;
+      padding : {
+        left: em(70,13);
+        right: em(20,13);
+      }
+
+      background-color: #fff; @include flex.flex-box;
+      @include flex.align-items('center');
+
+    }
+
+
+    .btn{
+      background-color: #b4b4b4;
+      border-color: #b4b4b4;
+      color: #fff;
+      height: 100%;
+      position: absolute;
+      top:0;
+      left: -1px;
+      border-radius: 0;
+
+
+    }
+    .file_name{
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left
+    }
+
+  }
+
+}
+
+textarea{
+  &.ft{
+    @include form.item();
+    @include form.placeholder(null, #999999, null);
+    width:100%;
+    padding:em(10, 13);
+    height:em(110, 13);
+    font-size:rem(13);
+    border-radius: rem(3);
+    resize: none;
+  }
+}

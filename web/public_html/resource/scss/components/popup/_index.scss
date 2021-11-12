@@ -1,0 +1,150 @@
+
+
+@use "sass:math";
+@use '../../common/variables' as var;
+@use '../../common/' as *;
+@use '../../common/color' as color;
+@use '../flex/mixin' as flex;
+
+$_zindex : 4000;
+.mask{
+    position: fixed;
+    top:0; left:0;
+    width: 100%; height: 100%;
+    z-index: $_zindex;
+    background: #000;
+    opacity: 0.3;
+    display: none;
+}
+.popup{
+    &_wrap{
+        position: fixed;
+        top:0; left:0;
+        width: 100%; height: 100%;
+        font-size: rem(16);
+        z-index: $_zindex;
+        @include flex.flex-box();
+        @include flex.align-items('center');
+        @include flex.justify-content('center');
+        iframe{
+            z-index: $_zindex + 1;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    }
+    &{
+        position: absolute;
+        left:50%;
+        top:10%;
+        bottom:10%;
+        transform: translateX(-50%) ;
+        z-index: $_zindex + 1;
+        width: 100%;
+        &.mw_640{
+            max-width: rem(640);
+            width: 90%;
+        }
+    }
+    &_box{
+        height: 100%;
+        position: relative;
+       
+    }
+    &_tit{
+        height: rem(71);
+        border-bottom:rem(3) solid #101010;
+        @include flex.flex-box();
+        @include flex.align-items('center');
+        background-color: #fff;
+
+        padding: 0 em(20, 16);
+        h1{
+            font-size: em(20, 16);
+        }
+    }
+    &_con{
+        padding: em(40, 16);
+        max-height: calc(100% - #{rem(71)});
+        overflow-y: auto;
+        overflow-x: hidden;
+        background-color: #fff;
+        input.inp,
+        select.sel{
+            height: rem(42);
+            line-height: rem(40);
+        }
+        .fm_ch ._icon {
+            width: rem(20);
+            height: rem(20);
+        }
+
+    }
+    &_close{
+        position: absolute;
+        right:em(20, 16);
+        top:0;
+        height: rem(71);
+        @include flex.flex-box();
+        @include flex.align-items('center');
+        &_button{
+            font-size: em(20, 16);
+        }
+    }
+    @include mob{
+        &_tit{
+            height: rem(60);
+            h1{
+                font-size: em(18, 16);
+            }
+        }
+        &_con{
+            padding: em(20, 16);
+            max-height: calc(100% - #{rem(60)});
+            input.inp,
+            select.sel{
+                height: rem(32);
+                line-height: rem(30);
+            }
+            .fm_ch ._icon {
+                width: rem(15);
+                height: rem(15);
+            }
+        }
+        &_close{
+            height: rem(60);
+            &_button{
+                font-size: em(18, 16);
+            }
+        }
+    }
+}
+
+
+
+.popup_con{
+    .table{
+        overflow: hidden;
+    }
+    table{
+        table-layout: fixed;
+        min-width: 100%;
+        width: auto;
+        margin: 0 -1px;
+        th, td{
+            vertical-align: middle;
+            height: rem(40);
+            border: 1px solid color.$color-border;
+            color: color.$color-text-b5;
+            padding: rem(10);
+            font-weight: 400;
+            line-height: 1.6;
+        }    
+        th{
+            text-align: left;
+            color: color.$color-text-b;
+            background-color: #f6f6f6;
+        }
+    }
+}

@@ -1,0 +1,163 @@
+<?php
+if(!defined('_HOME_TITLE')) exit;
+
+
+$_contents = new Category();
+
+
+
+//신규등록
+
+if( $_base['method'] == 'POST' && $mode == "insert"){
+
+	if($adm_no == "" || $news_category_name_kor == "" || $news_category_name_eng == "") msg_err("주요 등록 항목이 누락되었습니다.");
+
+	$add_data = array(
+			'name' => $news_category_name_kor,
+			'english_name' => $news_category_name_eng,
+			'naver_cateory' => $news_category_name_naver,
+			'daum_categery' => $news_category_name_daum,
+			'naver_cateory_code' => $news_category_code_naver,
+			'daum_categery_code' => $news_category_code_daum,
+			'reg_adm' => $adm_no,
+			'reg_ip' => $_SERVER["REMOTE_ADDR"],
+			'reg_date' => date("Y-m-d H:i:s")
+			);
+	//$data = array_merge($data, $add_data);
+
+	$result = $_contents->addCategory($add_data);
+
+	//msg_err("등록에 실패하였습니다bbbb".$result);
+
+
+	if($result) msg_replace("등록되었습니다", 'list_news_category');
+	else msg_err("등록에 실패하였습니다");
+
+	exit;
+
+}
+
+//정보수정
+if($_base['method'] == 'POST' && $mode == "modify"){
+
+	$param_data = array(
+		'name'=>$name,
+		'nPage'=>$nPage
+		);
+
+	$param = makeParam($param_data);
+
+	if(empty($seq)) msg_err("대상이 없습니다");
+
+	if($adm_no == "" || $news_category_name_kor == "" || $news_category_name_eng == "") msg_err("주요 등록 항목이 누락되었습니다.");
+
+
+	$add_data = array(
+			'name' => $news_category_name_kor,
+			'english_name' => $news_category_name_eng,
+			'naver_cateory' => $news_category_name_naver,
+			'daum_categery' => $news_category_name_daum,
+			'naver_cateory_code' => $news_category_code_naver,
+			'daum_categery_code' => $news_category_code_daum,
+			'modi_adm' => $adm_no,
+			'modi_ip' => $_SERVER["REMOTE_ADDR"],
+			'modi_date' => date("Y-m-d H:i:s")
+			);
+
+	$where = array('id' => $seq);
+
+	$result = $_contents->updateCategory($add_data, $where);
+
+	if($result) msg_replace("수정되었습니다", 'list_news_category'.$param['query']);
+	else msg_err("수정에 실패하였습니다");
+
+	exit;
+}
+
+//정보수정
+if($_base['method'] == 'POST' && $mode == "use_tf_modify"){
+
+	$param_data = array(
+		'nPage'=>$nPage
+		);
+
+	$param = makeParam($param_data);
+
+	if(empty($seq)) msg_err("대상이 없습니다");
+
+	if($adm_no == "" || $use_tf == "") msg_err("주요 등록 항목이 누락되었습니다.");
+
+
+	$add_data = array(
+			'use_tf' => $use_tf,
+			'modi_adm' => $adm_no,
+			'modi_ip' => $_SERVER["REMOTE_ADDR"],
+			'modi_date' => date("Y-m-d H:i:s")
+			);
+
+	$where = array('id' => $seq);
+
+	$result = $_contents->updateCategory($add_data, $where);
+
+	if($result) msg_replace("수정되었습니다", 'list_news_category'.$param['query']);
+	else msg_err("수정에 실패하였습니다");
+
+	exit;
+	
+}
+
+
+
+//선택삭제
+if($_base['method'] == 'POST' && $mode == "selDelete"){
+
+	$param_data = array(
+		'nPage'=>$nPage
+		);
+
+	$param = makeParam($param_data);
+
+	if(count($chk) < 1) msg_err("대상이 없습니다");
+
+	if($adm_no == "") msg_err("주요 등록 항목이 누락되었습니다.");
+
+	if($db->query("update TBL_CATEGORIES set del_tf = 'Y', del_adm = '".$adm_no."', del_date = now(), del_ip = '".$_SERVER["REMOTE_ADDR"]."' where id in (".implode(',', $chk).")")) msg_replace("삭제되었습니다", 'list_news_category'.$param['query']);
+	else msg_err("삭제에 실패하였습니다");
+	exit;
+
+}
+
+//정보삭제
+if($_base['method'] == 'POST' && $mode == "Delete"){
+
+	$param_data = array(
+		'nPage'=>$nPage
+		);
+
+	$param = makeParam($param_data);
+
+	if(empty($seq)) msg_err("대상이 없습니다");
+
+	if($adm_no == "") msg_err("주요 등록 항목이 누락되었습니다.");
+
+	$add_data = array(
+			'del_tf' => 'Y',
+			'del_adm' => $adm_no,
+			'del_ip' => $_SERVER["REMOTE_ADDR"],
+			'del_date' => date("Y-m-d H:i:s")
+			);
+
+	$where = array('id' => $seq);
+
+	$result = $_contents->updateCategory($add_data, $where);
+
+	if($result) msg_replace("삭제되었습니다", 'list_news_category'.$param['query']);
+	else msg_err("삭제에 실패하였습니다");
+
+	exit;
+	
+}
+
+
+
+exit;

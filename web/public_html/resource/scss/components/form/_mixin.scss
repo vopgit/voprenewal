@@ -1,0 +1,201 @@
+@use '../../common/variables' as var;
+@use '../../common/color' as color;
+@use '../../common/' as *;
+
+@use 'sass:string';
+
+
+@function svgRdIcon($color){
+  $color: '%23' + str-replace( #{$color}, "#", "");
+  $icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewbox='0 0 20 20'%3E%3Cpath d='M10 20C4.5 20 0 15.5 0 10 0 4.5 4.5 0 10 0 15.5 0 20 4.5 20 10 20 15.5 15.5 20 10 20ZM10 5C7.2 5 5 7.2 5 10 5 12.8 7.2 15 10 15 12.8 15 15 12.8 15 10 15 7.2 12.8 5 10 5Z' fill='#{$color}' /%3E%3C/svg%3E";
+  @return url($icon);
+}
+
+@function svgChIcon($color){
+  $color: '%23' + str-replace( #{$color}, "#", "");
+  $icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' id='check_big' x='0px' y='0px' viewBox='0 0 27 27' enable-background='new 0 0 27 27' fill='#{$color}' xml:space='preserve'%3E%3Cpath id='icon_copy_2' d='M19.95,10.27l-8.271,8.28l-0.192-0.2l-0.044,0.05l-5.514-5.52l1.838-1.84l3.868,3.871l6.476-6.48 L19.95,10.27z'/%3E%3C/svg%3E%0A";
+  @return url($icon);
+}
+
+@mixin item() {
+  font-weight: inherit;
+  outline: 0;
+  letter-spacing: -0.025em;
+
+  border: 1px solid #ddd;
+  background-color: #ffffff;
+  color: #222222;
+  
+  @content;
+}  
+
+@mixin size($fs : 16, $width : 300, $height : 50){
+  font-size   : rem($fs);
+  width       : em($width, $fs);
+  height      : em($height, $fs);
+  line-height : em( ($height - 2), $fs);
+  padding : {
+    left : em(15, $fs);
+    right: em(15, $fs);
+  }
+  @content;
+}
+
+
+@mixin color($bg, $text, $border, $bg-hover) {
+  background: $bg;
+
+  color: $text;
+
+  @if $border {
+      border-color: $border;
+  }
+
+  @else {
+      border: 0px;
+  }
+
+  @content;
+}
+
+@mixin  placeholder($bg : null, $text : null, $border : null) {
+  &::placeholder{
+    @if $bg   {
+      background-color: $bg;
+    }
+    @if $text {
+      color: $text;
+    }
+    @if $border {
+      border-color: $border;
+    }
+    font-weight: 300;
+    opacity: 1; /* 파이어폭스에서 뿌옇게 나오는 현상을 방지하기 위한 css */
+  }
+  &::-webkit-input-placeholder{
+    @if $bg   {
+      background-color: $bg;
+    }
+    @if $text {
+      color: $text;
+    }
+    @if $border {
+      border-color: $border;
+    }
+    color: $text;
+    font-weight: 300;
+  }
+  &::-moz-placeholder{
+    @if $bg   {
+      background-color: $bg;
+    }
+    @if $text {
+      color: $text;
+    }
+    @if $border {
+      border-color: $border;
+    }
+    color: $text;
+    font-weight: 300;
+    opacity: 1; /* 파이어폭스에서 뿌옇게 나오는 현상을 방지하기 위한 css */
+  }
+  &:-ms-input-placeholder  { 
+    @if $bg   {
+      background-color: $bg;
+    }
+    @if $text {
+      color: $text;
+    }
+    @if $border {
+      border-color: $border;
+    }
+    color: $text;
+    font-weight: 300;
+  }
+}
+
+
+@mixin item-chrd() {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+
+  outline: 0;
+  letter-spacing: -0.025em;
+
+  
+  > span{
+    vertical-align: middle;
+    line-height: 1.5em;
+  }
+
+  ._icon{
+    position: relative;
+    display: inline-block;
+    line-height: 1.5em;
+    
+    background-color: #ffffff;
+
+    &::before, &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      background-repeat: no-repeat;
+      background-size: 97%;
+      background-position: center center;
+    }
+    &::before{
+      border: 1px solid #dddddd;
+    }
+    &::after{
+      @include vendor(transition, 'transform 0.2s cubic-bezier(0, 0.81, 0.36, 1.14)');
+      transform: translate(-50%, -50%) scale(0);
+    }
+  }
+  input[type=radio], 
+  input[type=checkbox] {
+    position: absolute;
+    top: 0 !important;
+    left: 0 !important;
+    line-height: 0 !important;
+    font-size: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    color: transparent !important;
+    overflow: hidden !important;
+    opacity: 0;
+    &:checked + ._icon::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+  
+  
+  @content;
+}  
+
+@mixin size-chrd($fs : 16, $width : 27, $round : 0){
+  font-size   : rem($fs);
+  ._icon{
+    width       : em($width, $fs);
+    height      : em($width, $fs);
+    @if $round == 100%{
+      border-radius: 100%;
+    }@else if $round != 0{
+      border-radius: em($round, $fs);
+    }
+    &::before {
+      @if $round == 100%{
+        border-radius: 100%;
+      }@else if $round != 0{
+        border-radius: em($round, $fs);
+      }
+      background-color: #ffffff;
+    }
+  }
+  @content;
+}

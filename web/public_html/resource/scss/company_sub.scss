@@ -1,0 +1,203 @@
+@use "sass:math";
+@use 'common/' as *;
+@use 'common/color' as color;
+@use 'components/flex/mixin' as flex;
+@use 'components/icon/mixin' as icon;
+
+@use './components/search';
+@use './components/board';
+@use './components/page';
+
+
+$_fs : 16;
+.con{
+    &.sub{
+        font-size: rem($_fs);
+        background-color: #ffffff;
+        font-family: 'Montserrat','Noto Sans KR', serif;
+        padding : {
+            top: em(220, $_fs);
+            bottom: em(100, $_fs);
+        } 
+        h1{
+            font-size:rem(54, $_fs);
+            line-height:em(60, 54);
+            font-weight: 700;
+        }
+        img{
+            max-width: 100%;
+        }
+        @include tab (true) {
+           
+        }
+        @include mob {
+            padding : {
+                top: em(110, $_fs);
+                bottom: em(50, $_fs);
+            } 
+            h1{
+                font-size:rem(30, $_fs);
+                line-height:em(40, 30);
+            }
+        }
+    }
+}
+
+//기자가 보내는 편지
+.lv{
+    &{
+        margin-top: em(95, 16);
+        margin-bottom: em(70, 16);
+        font-size: rem(16);
+        text-align: center;
+    }
+    
+    //top
+    &_top{
+        &_tit{
+            font-size: em(40, 16);
+            line-height: em(54, 40);
+        }
+        &_tit_sub{
+            margin-top: em(26, 20);
+            margin-bottom: em(58,20);
+            font-size: em(20, 16);
+            line-height: em(34, 20);
+            color: #999999;
+        }
+    }
+
+    //tit_box
+    &_tit_box{
+        border-top: 2px solid #222222;
+        border-bottom: 1px solid #ddd;
+        background-color: #f5f6fa;
+        position: relative;
+        padding: em(54, 16) em(70, 16);
+        font-weight: 300;
+        font-size: em(16, 16);
+        line-height: em(30, 16);
+        > p{
+            max-width: em(800, 16);
+            margin: {
+                left: auto;
+                right: auto;
+            };
+        }
+    }
+    &_arrow{
+
+        &_left, &_right{
+            position: absolute;
+            display: block;
+            top:50%;
+            width: em(60, 16);
+            height: em(60, 16);
+            transform: translateY(-50%);
+            transform-origin: center center;
+            background: #222222 no-repeat center center;
+            background-size: em(44, 16) auto;
+            background-image: icon.svg-icon-arrow(#ffffff);
+            opacity: 0.2;
+            transition: opacity 0.3s;
+            &:hover{
+                opacity: 1;
+            }
+        }
+        &_left{
+            left: 0;
+            transform: rotate(-180deg) translateY(50%);
+        }
+        &_right{
+            right: 0;
+        }
+    }
+    &_con{
+        &{
+            padding-bottom: em(75, 16);
+            border-bottom: 1px solid #ddd;
+        }
+    }
+    &_item{
+        &_box{
+            max-width: em(800, 16);
+            margin: {
+                left: auto;
+                right: auto;
+            };
+        }
+        &{
+            text-align: left;
+            padding-top: em(60, 16);
+            counter-increment: lv_item;    
+            p{
+                font-size: em(30, 16);
+                line-height: em(40, 30);
+                padding-bottom: em(27, 30);
+                font-weight: 500;
+                @include flex.flex-box();
+                @include flex.flex-direction('row');
+                @include flex.flex-wrap('nowrap');
+                &::before{
+                    min-width: 0.85em;
+                    width: 0.85em;
+                    max-width: 1.75em;
+                    content: counter(lv_item) '. ';
+                    flex: 0 1 auto;
+                }
+            }
+            img{
+                width: 100%;
+                display: block;
+            }
+           
+        }
+        &_more{
+            margin-top: em(13, 16);
+            display: inline-block;
+            color: #666666;
+            padding-right: em(20, 16);
+            line-height: 1;
+            background:no-repeat center right 0;
+            background-size: auto em(20, 16);
+            background-image: icon.svg-icon-arrow(#999999);
+            position: relative;
+            &::before{
+                content: '';
+                display: block;
+                width: 0;
+                bottom: 0;
+                left:0;
+                height: 1px;
+                background-color: #999999;
+                transition: width 0.3s;
+                position: absolute;
+            }
+            &:hover::before{
+                width: calc(100% - #{em(5, 16)});
+            }
+
+        }
+    }
+    @include mob {
+        &{
+            margin-top: em(47.5, 13);
+            margin-bottom: em(35, 13);
+            font-size: rem(13);
+        }
+        &_item{
+            word-break: break-all;   
+        }
+    }
+}
+
+
+
+@include print (){
+   .con.sub{
+        padding : {
+            top: 0;
+            bottom: 0;
+        } 
+   }
+}

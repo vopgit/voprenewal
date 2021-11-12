@@ -1,0 +1,57 @@
+@use '../../common/variables' as var;
+@use '../../common/color' as color;
+@use '../../common/' as *;
+@use '../flex/mixin' as flex;
+
+$_fs: 14;
+.area{
+    &_box{
+        display: block;
+        overflow: hidden;
+        border: 1px solid color.$color-border2;
+        font-size: rem($_fs);
+        border-radius: em(3, $_fs);
+        &.ty_counting {
+            & + .ty_counting {
+                margin-top: rem(30);
+            }
+        }
+    }
+    &_tit{
+        &{
+            font-size: em(14, $_fs);
+            line-height: em(25, 14);
+            padding-top: em(10, 14);
+            padding-bottom: em(10, 14);
+        }
+        &_box{
+            &{
+                background-color: color.$color2-bg;
+                padding-left: em(30, $_fs);
+                padding-right: em(30, $_fs);
+            }
+            &.not_pd{
+                padding: 0;
+            }
+            @at-root .area_box .area_box &{
+                &{
+                    padding-left: em(20, $_fs);
+                    padding-right: em(20, $_fs);
+                    background-color: color.$color1-bg;
+                }
+            }
+        }
+    }
+    &_con_box{
+        &{
+            background-color: #fff;
+            padding: rem(30);
+        }
+        &.multy {
+            & + .multy { padding-top: 0; }
+        }
+        &.not_pd{
+            padding: 0;
+        }
+    }
+}

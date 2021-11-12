@@ -1,0 +1,55 @@
+@use '../../common/variables' as var;
+@use '../../common/color' as color;
+@use '../../common/' as *;
+@use '../flex/mixin' as flex;
+$sta_color : (
+    1 : #fff2df, //작성중
+    2 : #e7f5eb, //대기중
+    3 : #eff2f7, //발행중
+    4 : #eeeeee, //삭제됨
+    5 : #fceeee, //보류중
+);
+$_fs: 16;
+.info{
+    &_box{
+        background-color: #fff;
+        border: 1px solid #dcdee2;
+        padding:em(24,$_fs) em(30,$_fs);
+        border-radius: 3px;
+            width: 100%;
+    
+       
+    }
+    &_right{
+        .info_box{
+            padding: em(30,$_fs);
+        }
+
+    }
+}
+
+
+.stabox{
+    &{
+        height: em(80,$_fs);
+        padding: em(10,$_fs);
+        @include flex.flex-box;
+        @include flex.flex-wrap('wrap');
+        @include flex.align-items('center');
+        @include flex.justify-content('center');
+        text-align: center;
+        align-content: center;
+        
+
+        p{
+            width: 100%;
+        }
+    }
+    &_c{
+        @each $name, $color in $sta_color {
+            &#{$name}{
+                background-color: $color;
+            }
+        }
+    }
+}

@@ -1,0 +1,215 @@
+@use "sass:math";
+@use "sass:selector";
+@use '../../common/variables' as var;
+@use '../../common/color' as color;
+@use '../../common/' as *;
+@use 'mixin' as form;
+
+$_fs  : 16;
+$_fs-mob  : 13;
+
+
+input{
+  &.inp, &[class*=inp_]{
+      max-width: 100%;
+      @include form.item();
+      @include form.placeholder(null, #999999, null);
+  }
+  &.inp{
+    @include form.size(16, 220, 50);
+    &_lg{
+        @include form.size(18, 400, 60);
+    }
+    &_sm{
+        @include form.size(14, 120, 40);
+    }
+    &_rd{
+        border-radius: em(100);
+    }
+  }
+}
+
+/* radio, checkbox */
+.fm{
+  &_rd, &_ch {
+    @include form.item-chrd();
+  }
+  &_rd{
+    @include form.size-chrd(16, 26, 100%);
+    ._icon{
+      &::after {
+        background-image: form.svgRdIcon(map-get(color.$colors, 1));
+      }
+    }
+    &.cb{
+      ._icon{
+        &::after {
+          background-image: form.svgRdIcon(color.$color-text-b);
+        }
+      } 
+    }
+  }
+  &_ch{
+    @include form.size-chrd(16, 26, 0);
+    ._icon{
+      &::after {
+        background-image: form.svgChIcon(map-get(color.$colors, 1));
+      }
+    }
+    &.cb{
+      ._icon{
+        &::after {
+          background-image: form.svgChIcon(color.$color-text-b);
+        }
+      } 
+    }
+  }
+}
+ 
+
+  
+select{
+  &.sel{
+    @include form.item();
+    @include form.size(16, 220, 50);
+      z-index: 1;
+      background-repeat: no-repeat;
+      background-image: url("data:image/svg+xml,%3Csvg version='1.1' data-png-path='../images/common/sect_arrow_down.png' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 10 10' enable-background='new 0 0 10 10' xml:space='preserve'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' fill='%23222222' d='M8.125,3.638c-0.979,1.12-1.959,2.24-3.269,3.736 C3.548,5.878,2.569,4.758,1.589,3.638C3.768,3.638,5.946,3.638,8.125,3.638z'/%3E%3C/svg%3E");
+      background-position: top 50% right em(10);
+      background-size: em(18) em(18);
+
+      &_lg{
+        @include form.size(18, 400, 60);
+      }
+      &_sm{
+          @include form.size(14, 120, 40);
+      }
+      &_rd{
+          border-radius: em(100);
+      }
+  }
+}
+textarea{
+  &.ft{
+    @include form.item();
+    @include form.placeholder(null, #999999, null);
+    width:100%;
+    padding:em(10, 16);
+    height:em(110, 16);
+    font-size:rem(16);
+    resize: none;
+    padding: 0.75em 1em;
+    &.h_300{
+      height:em(300, 16);
+    }
+  }
+}
+
+@include pc-only{
+  input, 
+  select{
+    &[class*=fm_full]:not(.fm_full_sm):not(.fm_full_md){
+      width: 100%;
+      display: block;
+    }
+  }
+}
+
+@include tab(true){
+  input, 
+  select{
+    &[class*=fm_full]:not(.fm_full_sm){
+      width: 100%;
+      display: block;
+    }
+  }
+}
+
+@include mob {
+ 
+input{
+  &.inp{
+    @include form.size($_fs-mob, 150, 32);
+    &_lg{
+      @include form.size(18, 300, 50);
+    }
+    &_sm{
+      @include form.size(10, 80, 30);
+    }
+  }
+}
+
+
+select{
+  &.sel{
+    @include form.size($_fs-mob, 150, 32);
+    &_lg{
+      @include form.size(18, 300, 50);
+    }
+    &_sm{
+      @include form.size(14, 120, 30);
+    }
+  }
+}
+
+.fm{
+  &_rd{
+    @include form.size-chrd(13, 20, 100%);
+  }
+  &_ch{
+    @include form.size-chrd(13, 20, 0);
+  }
+}
+
+input, 
+select{
+  &[class*=fm_full]{
+    width: 100%;
+    display: block;
+  }
+}
+
+textarea{
+  &.ft{
+    font-size:rem(13);
+  }
+}
+
+}
+
+
+
+
+//fm_box
+.fm_wrap{
+  font-size: 0;
+  > *{
+    vertical-align: middle;
+  }
+  @include wrap-padding( '&' , 0, '*');
+  @each $num in var.$padding-wraps {
+    
+    @include wrap-padding( '&.' , $num, '*'){
+      input, 
+      select{
+        @include pc-only {
+            &[class*=fm_full]:not(.fm_full_sm):not(.fm_full_md){
+            max-width: calc(100% - #{rem($num)});
+            }
+        }
+
+        @include tab(true) {
+            &[class*=fm_full]:not(.fm_full_sm){
+            max-width: calc(100% - #{rem($num)});
+            }
+        }
+
+        @include mob {
+            &[class*=fm_full]{
+            max-width: calc(100% - #{rem(math.div($num, 2))});
+            }
+        }
+      }
+    }
+  }
+}

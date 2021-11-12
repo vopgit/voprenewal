@@ -1,0 +1,81 @@
+
+@use "sass:math";
+@use '../../common/variables' as var;
+@use '../../common/' as *;
+@use '../../common/color' as color;
+@use '../icon/mixin' as icon;
+
+$_fs : 16;
+
+.prev_next_page_box {
+    margin-top: -1px;
+    border-top: 1px solid #222222;
+    font-size: rem($_fs);
+    li {
+        border-bottom: 1px solid #dddddd;
+        a {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            color: #999999;
+            .td {
+                display: table-cell;
+                height: em(70, $_fs);
+                vertical-align: middle;
+                font-weight: 400;
+                padding-left: em(10, $_fs);
+                padding-right: em(10, $_fs);
+
+                &:first-child {
+                    width: em(170, $_fs);
+                    padding-left: em(40, $_fs);
+                    padding-right: em(40, $_fs);
+                    text-align: left;
+                    color: #222;
+                    white-space: nowrap;
+                    &:after{
+                        content: '';
+                        display: inline-block;
+                        margin-left: em(20, $_fs);
+                        width: em(22, $_fs);
+                        height: em(22, $_fs);
+                        vertical-align: middle;
+                        background:no-repeat center center;
+                        background-size: 100% auto;
+                        background-image: icon.svg-icon-arrow(#222222);
+                    }
+                }
+
+                &:last-child {
+                    width: em(160, $_fs);
+                    padding-left: em(40, $_fs);
+                    padding-right: em(40, $_fs);
+                    text-align: right;
+                    letter-spacing: 0;
+                }
+            }
+	        &:hover {
+	        	background: #f5f5f5;
+	            color: map-get(color.$colors, 1);
+	        }
+        }
+
+        &.prev_box {
+            .td:first-child:after{
+                @include vendor(transform, 'rotate(-90deg)');
+            }
+        }
+
+        &.next_box {
+            .td:first-child:after{
+                @include vendor(transform, 'rotate(90deg)');
+            }
+        }
+
+        .ellip_1 {
+            display: block;
+        }
+    }
+}
+
+

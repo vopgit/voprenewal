@@ -1,0 +1,65 @@
+@use '../../common/variables' as var;
+@use '../../common/' as *;
+
+//
+// icon-box        : icon-box mixin
+// date            : 2020.07.27
+///
+/// @param {string} $icon-name         : 이름
+/// @param {string} $icon-url          : 경로
+/// @param { } $icon-width             : 가로
+/// @param { } $icon-height            : 높이
+/// @param {string} $icon-bg-size      : 배경 사이즈
+///
+@mixin icon-box(
+    $icon-name,
+    $icon-url :null,
+    $icon-width : auto,
+    $icon-height : auto,
+    $icon-bg-size : cover,
+){
+i.icon_#{$icon-name}{
+    @if $icon-url{
+        background-image   : url(quote(#{$icon-url}));
+    }
+        background-size    : $icon-bg-size;
+        width              : $icon-width;
+        height             : $icon-height;
+    }
+}
+
+/*icon*/
+i[class*=icon_], i[class^=icon_]{
+    display: inline-block;
+    text-align: center;
+    text-indent: -9999px;
+    font-size: 1px;
+    overflow: hidden;
+    width: 20px; height: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    vertical-align: middle;
+}
+
+ @for $i from 1 to 8 {
+    @include icon-box("0#{$i}", "/resource/images/common/icon/icon_0#{$i}.png", rem(70), rem(70), contain);
+ }
+
+
+
+ i.icon_{
+    @for $i from 1 to 12 {
+        @if $i <= 9{
+        &0#{$i}{
+            background-image: url("/resource/images/common/icon/icon_0#{$i}.png"); background-size: contain; width: rem(70); height: rem(70);
+        }
+        }
+        @else{
+            &#{$i}{
+                background-image: url("/resource/images/common/icon/icon_#{$i}.png"); background-size: contain; width:rem(70); height: rem(70);
+            }
+        }
+        
+    }
+}

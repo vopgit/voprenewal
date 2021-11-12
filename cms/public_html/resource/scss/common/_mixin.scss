@@ -1,0 +1,175 @@
+@use "sass:math";
+@use "sass:selector";
+@use "sass:string";
+@use "functions" as *;
+@use "_mixin_media" as *;
+//
+// gradation  : gradation 
+// date       : 2020.07.27
+/// @param {color} $colorBg  : bg1
+/// @param {color} $colorBg2 : bg2
+// 
+@mixin gradation($colorBg, $colorBg2, $deg : 45deg) {
+  background: $colorBg; /* Old browsers */
+  background: -moz-linear-gradient($deg,  $colorBg 0%, $colorBg 30%, $colorBg2 70%, $colorBg2 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient($deg,  $colorBg 0%,$colorBg 30%,$colorBg2 70%,$colorBg2 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient($deg,  $colorBg 0%,$colorBg 30%,$colorBg2 70%,$colorBg2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=#{$colorBg}, endColorstr=#{$colorBg2},GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  /* IE6-9 */
+  transition: none;
+}
+
+@mixin gradation2($colorBg, $colorBg2, $deg : 45deg) {
+  background: $colorBg; /* Old browsers */
+  background: -moz-linear-gradient($deg,  $colorBg 0%, $colorBg 20%, $colorBg2 80%, $colorBg2 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient($deg,  $colorBg 0%,$colorBg 20%,$colorBg2 80%,$colorBg2 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient($deg,  $colorBg 0%,$colorBg 20%,$colorBg2 80%,$colorBg2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=#{$colorBg}, endColorstr=#{$colorBg2},GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  /* IE6-9 */
+  transition: none;
+}
+
+
+//
+// clearfix        : clearfix mixin 
+// date            : 2020.07.27
+//
+/// @param {string} $type          
+/// 
+@mixin clearfix($type : null) {
+  @if $type == null {
+    overflow: hidden;
+  }
+  @else if $type == "after"{
+    &::after {
+        display: block;
+        content: "";
+        clear: both;
+    }
+  }
+}
+
+//
+// ps-center       : ps-center mixin (transform)
+// date            : 2020.07.27
+///
+/// @param {string} $type       :
+///
+@mixin ps-center($type : null) {
+  position: absolute;
+  @if $type == null {
+    width: 100%;
+    top: 50%; left: 50%;
+    @include vendor(transform,translate(-50%, -50%));
+  }
+  @else if $type == "middle" {
+    top: 50%;
+    @include vendor(transform,translate(0, -50%));
+  }
+  @else if $type == "center" {
+    left: 50%;
+    @include vendor(transform,translate( -50%, 0));
+  }
+}
+
+@mixin  margin-auto {
+    margin: {
+      left: auto;
+      right:auto;
+  }; 
+}
+
+@mixin background-img($url : null) {
+  @if($url != null){
+    background-image: url($url);
+  }
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+@mixin img-box($pt) {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  background-color: #f7f7f7;
+  &::before{
+    content:'';
+    display: block;
+    padding-top: $pt;
+  }
+  img{
+    display: block;
+    @include ps-center();
+    width: auto;
+    min-width: 100%;
+    max-width: 120%;
+    height: auto;
+  }
+}
+
+
+//
+@mixin  after-line-box ($color){
+  position: relative;
+  &::after{
+    content:'';
+    display: block;
+    position: absolute;
+    background:$color;
+    height: 1px;
+    width: 0;
+    bottom: 0;
+    left:50%;
+    @include vendor (transition, 'all .3s');
+  }
+  &:hover::after, &:focus::after{
+    width: 100%;
+    left:0;
+  }
+}
+
+@mixin  flex ($wrap : null) {
+  width: 100%;
+  
+  display:-webkit-box;
+  display:-ms-flexbox;
+  display:flex;
+
+  //기본 row
+  -webkit-box-orient:horizontal;
+  -ms-flex-direction:row;
+  flex-direction:row;
+  @if($wrap == 'nowrap'){
+    -webkit-box-lines:single;
+    -ms-flex-wrap:nowrap;
+    flex-wrap:nowrap;
+  }
+  @else{
+    -ms-flex-wrap:wap;
+    flex-wrap:wrap;
+  }
+}
+
+@mixin unify-parent($child) {
+  @at-root #{selector.unify(&, $child)} {
+    @content;
+  }
+}
+
+
+@mixin wrap-padding($name, $num : 0, $child : '*') {
+  @if $num > 0{
+    #{$name}wp_#{$num}{
+     
+        margin-left: rem($num * -1);
+        margin-top : rem($num * -1);
+        > #{$child}{
+          margin-top: rem($num);
+          margin-left: rem($num);
+        }
+   
+      @content;
+    }
+  }
+}

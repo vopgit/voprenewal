@@ -1,0 +1,17 @@
+$var-browser-context : 16 !default;
+$padding-wraps       : (5,10,15,20,30, 40) !default;;
+$wraps               : (1780, 1600 ,1440 ,1380, 1180, 1024, 980, 820, 800, 640)  !default;
+$wrap                : 1280  !default;
+
+
+@mixin iconFont {
+	font-family: 'icomoon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,91 @@
+@use "sass:math";
+@use '../../common/' as *;
+
+//
+// color           : color mixin (btn color)
+// date            : 2021.07.27
+///
+/// @param {color} $bg          :
+/// @param {color} $text        :
+/// @param {color} $border      :
+/// @param {color} $bg-hover    : hover
+/// @param {color} $text-hover  : hover
+/// @param {color} $border-hover: hover
+///
+@mixin color($bg, $text, $border , $bg-hover : $bg, $text-hover  : $text, $border-hover  : $border) {
+  background: $bg;
+
+  color: $text;
+
+  border-color: $border;
+
+  &:active,
+  &:hover,
+  &:focus {
+
+      @if $bg-hover {
+        background: $bg-hover;
+      }
+
+      @if $text-hover {
+        color: $text-hover;
+      }
+    
+      @if $border-hover {
+          border-color:$border-hover;
+      }
+  }
+}
+
+// size            : size mixin (btn size)
+// date            : 2021.07.27
+///
+/// @param {color} $fs          : fs
+/// @param {color} $width       : w
+/// @param {color} $height      : h
+///
+@mixin size($fs : 12, $height : 24, $padding: 10){
+  font-size   : rem($fs);
+  height      : em($height, $fs);
+  line-height : em( ($height - 2), $fs);
+  border-radius: em(3,$fs);
+  padding : {
+    left : em($padding, $fs);
+    right: em($padding, $fs);
+  } 
+  @content;
+}
+
+
+@mixin item($fs : 12, $active : null) {
+
+  overflow: hidden;
+  display: inline-block;
+  
+  font-weight: 500;
+
+  letter-spacing: 0;
+
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  color: #222;
+  border: 1px solid #b2baca;
+  //background-color: #ffffff;
+  cursor: pointer;
+  &:hover{
+    color: #fff;
+    background-color: #b2baca;
+  }
+  @include vendor(transition, 'background 0.2s ease-in-out, transform 0.2s ease-in-out, color 0.2s ease-in-out');
+  &:active {
+      @include vendor(transform,scale(0.97));
+  }
+
+  >span {
+   position: relative;
+  }
+
+  @content;
+
+}

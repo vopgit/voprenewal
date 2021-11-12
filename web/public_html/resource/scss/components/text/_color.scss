@@ -1,0 +1,15 @@
+@use '../../common/color' as color;
+
+@each $name, $color in color.$colors {
+    .tc_#{$name}{color: $color;}
+}
+
+.tc_sub{color:color.$color-text-sub;}
+.tc_w{color:color.$color-text-w }
+.tc_b{color:color.$color-text-b }
+.tc_r{color:color.$color-text-red;}
+.tc_b2{color:color.$color-text-b2 }
+.tc_b3{color:color.$color-text-b3 }
+.tc_b4{color:color.$color-text-b4 }
+.tc_b5{color:color.$color-text-b5 }
+.tc_cp{color:color.$compay-color}

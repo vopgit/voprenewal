@@ -1,0 +1,23 @@
+
+@use '../common/' as *;
+
+
+//@include pc-xl {:root{font-size: vw(13, 2000);}
+@include print(){
+    @page {
+        size:21cm 29.7cm;
+        margin:0;
+    }
+    :root, html, body{
+        font-size: 1.3vw;
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            font-size: 0.75vw;
+        }
+    }
+    body{
+        zoom: 0.8;
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            zoom: 1;
+        }
+    }
+}

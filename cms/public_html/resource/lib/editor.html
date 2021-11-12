@@ -1,0 +1,150 @@
+ <!--floating left-->
+<div class="ew_m_btn_box">
+	<div class="ew_m_btn">
+		<button type="button" id="btnMenuText" title="텍스트" class="act">
+			<span><i class="iconFt_txt"></i></span>
+		</button>
+	</div>
+	<div class="ew_m_btn">
+		<button type="button" id="btnMenuGallery" title="사진" onclick="js_open_photo_list()">
+			<span><i class="iconFt_gallery"></i></span>
+		</button>
+	</div>
+	<div class="ew_m_btn">
+		<button type="button" id="btnMenuLink" data-url="link" onclick="act_popup(this)" title="링크" >
+		<span><i class="iconFt_link1"></i></span>
+	</button>
+	</div>
+	<div class="ew_m_btn">
+		<button type="button" id="btnMenuPlayer" data-url="youtube" onclick="act_popup(this)" title="유튜브영상">
+		<span><i class="iconFt_player"></i></span>
+	</button>
+	</div>
+	<div class="ew_m_btn">
+		<button type="button" id="btnMenuQuotes" data-url="blockquote" onclick="formatDoc('blockquote')" title="인용문">
+		<span><i class="iconFt_Edit_icon09"></i></span>
+	</button>
+	</div>
+	<div class="ew_m_btn">
+		<button type="button" id="btnMenuLine" title="점선" onclick="formatDoc('hr')">
+			<span><i class="iconFt_line_type"></i></span>
+		</button>
+	</div>
+	<div class="ew_m_btn">
+		<button type="button" id="btnMenuMemo" data-url="editroBox" onclick="act_popup(this)" title="박스">
+		<span><i class="iconFt_Edit_icon06"></i></span>
+	</button>
+	</div>
+	<div class="ew_m_btn">
+		<button type="button" id="btnMenuQ" data-url="question" onclick="act_popup(this)" title="질문">
+		<span><i class="iconFt_Edit_icon07"></i></span>
+	</button>
+	</div>
+	<div class="ew_m_btn">
+		<button type="button" id="btnMenuA" data-url="answer" onclick="act_popup(this)" title="답변">
+		<span><i class="iconFt_Edit_icon08"></i></span>
+	</button>
+	</div>
+	<div class="ew_m_btn">
+		<button type="button" id="btnMenuF" data-url="embed" onclick="act_popup(this)" title="외부컨텐츠">
+			<span><i class="iconFt_sns"></i></span>
+		</button>
+	</div>
+
+	<div class="ew_m_btn">
+		<button type="button" id="btnMenuMemo" data-url="editroBox" onclick="removeSectionHtml()" title="HTML태그삭제">
+			<span><i class="iconFt_delete"></i></span>
+		</button>
+	</div>
+</div>
+
+
+<!--floating menu-->
+<div class="ew_f_btn_box" id="floatingBtns" style="display:block; transform:translate(0, 0)">
+	<div class="ew_f_btn">
+		<button type="button" id="btnTxtBold" title="글자굵기" id="bold" onclick="formatDoc('bold')">
+			<span><i class="iconFt_ft-weight"></i></span>
+		</button>
+	</div>
+	<div class="ew_f_btn" id="btnColorsBox" title="글자컬러">
+		<button type="button" id="btnColor" title="글자컬러" onclick="$('.__font_color_wrap').toggle();" class="act"><span><i class="iconFt_ft-color"></i></span></button>
+		<div class="__font_color_wrap">
+			<button type="button" class="__font_color" data-color="#3c3e40" style="background-color:#3c3e40;"></button>
+			<button type="button" class="__font_color" data-color="#888888" style="background-color:#888888;"></button>
+			<button type="button" class="__font_color" data-color="#50a1c3" style="background-color:#50a1c3;"></button>
+			<button type="button" class="__font_color" data-color="#e68849" style="background-color:#e68849;"></button>
+			<button type="button" class="__font_color" data-color="#569e72" style="background-color:#569e72;"></button>
+			<button type="button" class="__font_color" data-color="#a97857" style="background-color:#a97857;"></button>
+		</div>
+	</div>
+	<div class="ew_f_btn">
+		<button type="button" id="btnTxtUnderline" title="밑줄" onclick="formatDoc('underline')">
+			<span><i class="iconFt_ft-decoration"></i></span>
+		</button>
+	</div>
+	<div class="ew_f_btn">
+		<button type="button" id="btnTxtTit" title="서브타이틀"  onclick="formatDoc('formatblock','h1')">
+			<span><i class="iconFt_txt-tit"></i></span>
+		</button>
+	</div>
+	<div class="ew_f_btn">
+		<button type="button" id="btnTxtHead" title="중간헤드라인" onclick="formatDoc('formatblock', 'h2')">
+			<span><i class="iconFt_txt-head"></i></span>
+		</button>
+	</div>
+	<div class="ew_f_btn">
+		<button type="button" id="btnTxtUnordered" title="목록" onclick="formatDoc('insertUnorderedList')">
+			<span><i class="iconFt_Text_icon06"></i></span>
+		</button>
+	</div>
+	<div class="ew_f_btn">
+		<button type="button" id="btnTxtOrdered" title="숫자목록"  onclick="formatDoc('insertOrderedList')">
+			<span><i class="iconFt_Text_icon07"></i></span>
+		</button>
+	</div>
+	 <div class="ew_f_btn">
+		<button type="button" id="btnTxtOrdered" title="좌측정렬"  onclick="formatDoc('justifyLeft')">
+			<span><i class="iconFt_t-left"></i></span>
+		</button>
+	</div>
+	<div class="ew_f_btn">
+		<button type="button" id="btnTxtOrdered" title="가운데정렬"  onclick="formatDoc('justifyCenter')">
+			<span><i class="iconFt_t-center"></i></span>
+		</button>
+	</div>
+	<div class="ew_f_btn">
+		<button type="button" id="btnTxtOrdered" title="우측정렬"  onclick="formatDoc('justifyRight')">
+			<span><i class="iconFt_t-right"></i></span>
+		</button>
+	</div>
+	<div class="ew_f_btn">
+		<button type="button" id="btnTxtOrdered" title="태그" onclick="showHtmlSource();">
+			<span><i class="iconFt_tag"></i></span>
+		</button>
+	</div>
+</div>
+
+
+<!--textarea-->
+<div class="popup_box" id="tabBox" style="z-index:1;  display: none;">
+    <div class="popup_wrap">
+        <div class="popup_ty1 popup_con">
+            <div class="popup tit_box row jc_sb ai_c">
+                <span>태그</span>
+                <button class="pop_close" type="button" onclick="$('#tabBox').hide();">
+                    <span class="material-icons">close</span>
+                </button>
+            </div>
+
+			<div class="popup_contents">
+                <textarea name="source" id="source" class="ft" style="height: 50vh;"></textarea>
+                <div class="t_center mt_30">
+                    <button class="btn_md btn_c2" onclick="setHtmlSource()">확인</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <span class="popbg"></span>
+</div>
+<!--textarea-->

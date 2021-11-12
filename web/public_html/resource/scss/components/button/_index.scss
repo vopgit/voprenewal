@@ -1,0 +1,180 @@
+@use "sass:math";
+@use "sass:selector";
+@use '../../common/variables' as var;
+@use '../../common/color' as color;
+@use '../../common/' as *;
+@use 'mixin' as btn;
+
+$_fs      :16;
+$_fs-mob  : 13;
+
+a, 
+button{
+  &.btn{
+    @include btn.item($_fs){};
+    @include btn.size{};
+  }
+  &[class*=btn_]{
+    @include btn.item($_fs);
+  }
+}
+
+a, 
+button{
+  &.btn{
+    //btn-size
+    &_lg{
+      @include btn.size(30, 400, 80){
+        //custom
+      };
+    }
+    &_md{
+      @include btn.size(16, 160, 54){
+        //custom
+      };
+    }
+    &_sm{
+      @include btn.size(14, 100, 40){
+        //custom
+      };
+    }
+  
+    //btn-layout
+    &_rd{
+      border-radius: em(200, $_fs);
+    }
+  }
+}
+
+@include pc-only{
+  a, 
+  button{
+    &[class*=btn_full]:not(.btn_full_sm):not(.btn_full_md){
+      width: 100%;
+      display: block;
+    }
+
+    &[class*=btn_auto]:not(.btn_auto_sm):not(.btn_auto_md){
+      width: auto;
+      min-width: auto;
+      max-width: none;
+    }
+  }
+}
+
+@include tab(true){
+  a, 
+  button{
+    &[class*=btn_full]:not(.btn_full_sm){
+      width: 100%;
+      display: block;
+    }
+    &[class*=btn_auto]:not(.btn_auto_sm){
+      padding : {
+        left : rem(10, $_fs);
+        right: rem(10, $_fs);
+      }
+      width: auto;
+      min-width: auto;
+      max-width: none;
+    }
+  }
+}
+
+@include mob {
+  a, 
+  button{
+    &.btn{
+      @include btn.size($_fs-mob, 150, 46);
+      &_md{
+        font-size: rem(13);
+      }
+      &_lg{
+        @include btn.size(18, 300, 60);
+      }
+      &_sm{
+        @include btn.size(10, 80, 30);
+      }
+    }
+    &[class*=btn_full]{
+      width: 100%;
+      display: block;
+    }
+    &[class*=btn_auto]{
+      padding : {
+        left : rem(10, $_fs-mob);
+        right: rem(10, $_fs-mob);
+      }
+      width: auto;
+      min-width: auto;
+      max-width: none;
+    }
+  }
+}
+
+
+$_btn-colors  : (
+  "cg"  false #999999 #fff #999999,
+  "cb"  true  #222222 #fff #222222,
+  "cg2" false #ffffff #222222 #e5e5e5 #222222 #fff #222222,
+  
+  "c1" true map-get(color.$colors, 1 ) #fff map-get(color.$colors, 1 ),
+  "c2" true map-get(color.$colors, 2 ) #fff map-get(color.$colors, 2 ),
+  "c3" true map-get(color.$colors, 3 ) #fff map-get(color.$colors, 3 ),
+  "c4" true map-get(color.$colors, 4 ) #fff map-get(color.$colors, 4 ),
+  "c5" true map-get(color.$colors, 5 ) #fff map-get(color.$colors, 5 ),
+
+  "cp_c1" true color.$compay-color #fff color.$compay-color,
+);
+
+
+//btn-color
+@each $name, $line-is, $bg, $text, $border, $bg-hover, $text-hover, $border-hover in $_btn-colors {
+  a, button{
+    &.btn{
+      &_#{$name}{
+        @include btn.color($bg, $text, $border, $bg-hover, $text-hover, $border-hover);
+      }
+  
+      @if $line-is {
+        &_line_#{$name}{
+          @include btn.color(transparent, $bg, $bg, $bg, #fff, $bg,);
+        }
+      }
+    }
+  }
+}
+
+
+//btn_box
+.btn_box{
+  font-size: 0;
+  [class*=btn]{
+    vertical-align: middle;
+  }
+  @include wrap-padding( '&.' , 0, '[class*=btn]');
+  @each $num in var.$padding-wraps {
+    
+    @include wrap-padding( '&.' , $num, '[class*=btn]'){
+      [class*=btn]{
+        @include pc-only {
+          &[class*=btn_full]:not(.btn_full_sm):not(.btn_full_md){
+            max-width: calc(100% - #{rem($num)});
+          }
+        }
+  
+        @include tab(true) {
+          &[class*=btn_full]:not(.btn_full_sm){
+            max-width: calc(100% - #{rem($num)});
+          }
+        }
+
+        @include mob {
+          &[class*=btn_full]{
+            max-width: calc(100% - #{rem(math.div($num, 2))});
+          }
+        }
+      }
+    }
+  }
+}
